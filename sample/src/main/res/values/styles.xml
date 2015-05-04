@@ -1,0 +1,17 @@
+<resources>
+
+    <style name="Theme.Application" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="toolbarStyle">@style/Widget.Toolbar</item>
+
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/accent</item>
+    </style>
+
+    <style name="Widget.Toolbar" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/primary</item>
+    </style>
+
+</resources>

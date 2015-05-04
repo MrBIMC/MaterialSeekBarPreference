@@ -1,0 +1,67 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:gravity="center_vertical"
+    android:paddingRight="16dp"
+    android:orientation="vertical"
+    android:background="?android:attr/selectableItemBackground" >
+
+    <TextView android:id="@android:id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:singleLine="true"
+        android:textSize="16sp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:ellipsize="marquee"
+        android:fadingEdge="horizontal"/>
+
+    <TextView
+        android:id="@android:id/summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:textSize="14sp"
+        android:textColor="?android:attr/textColorSecondary"
+        android:maxLines="10"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+        <LinearLayout
+            android:id="@+id/value_holder"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="72dp"
+            android:gravity="right"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/seekbar_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textSize="14sp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:singleLine="true"/>
+            <TextView
+                android:id="@+id/measurement_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="?android:attr/textColorSecondary"/>
+        </LinearLayout>
+        <SeekBar
+            android:id="@+id/seekbar"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/value_holder"
+            android:layout_alignParentLeft="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+</LinearLayout>

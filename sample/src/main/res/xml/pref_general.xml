@@ -1,0 +1,40 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sample="http://schemas.android.com/apk/res-auto">
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:key="seekbar1"
+        android:title="SeekbarPreference 1"
+        android:defaultValue="600"
+        sample:minValue="0"
+        sample:maxValue="1000"
+        sample:measurementUnit="ms"/>
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:key="seekbar2"
+        android:title="SeekbarPreference 2"
+        android:summary="This one is disabled!"
+        android:enabled="false"
+        android:defaultValue="5000"
+        sample:minValue="100"
+        sample:maxValue="10000"
+        sample:interval="200"
+        sample:measurementUnit="points"/>
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:key="seekbar3"
+        android:title="SeekbarPreference 3"
+        android:summary="You can define interval for seekbar"
+        sample:minValue="100"
+        sample:maxValue="10000"
+        sample:interval="200"
+        sample:measurementUnit="lemons"/>
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:key="seekbar4"
+        android:title="SeekbarPreference 4"
+        android:summary="Press on number to input value using keyboard"
+        sample:minValue="0"
+        sample:maxValue="8888888"
+        sample:measurementUnit="$"/>
+
+</PreferenceScreen>
