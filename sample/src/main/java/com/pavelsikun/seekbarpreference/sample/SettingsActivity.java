@@ -17,7 +17,8 @@ public class SettingsActivity extends AppCompatActivity {
         FrameLayout frame = new FrameLayout(this);
 
         if(Build.VERSION.SDK_INT > 16) frame.setId(generateViewId());
-        else frame.setId(676442);
+        else //noinspection ResourceType
+            frame.setId(676442);
 
         setContentView(frame, new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
