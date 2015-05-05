@@ -5,6 +5,7 @@ As far as I checked, there are no cool implementations of SeekBarPreference. So 
 
 #Usage
 
+Add this to your module dependencies:
 ```groovy
     compile 'com.pavelsikun:material-seekbar-preference:0.5'
 ````
@@ -15,7 +16,6 @@ Reference namespace on top of your preferences layout file:
 ````
 
 Now you can use this view in your preferences layout, just like any other normal preference:
-
 ```xml
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:key="your_pref_key"
