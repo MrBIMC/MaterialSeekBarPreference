@@ -1,4 +1,5 @@
 ## MaterialSeekBarPreference
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaterialSeekBarPreference-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1756)
 As far as I checked, there are no cool implementations of SeekBarPreference. So I decided to make one.
 
 ![](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/SCREENSHOT-1.png)
