@@ -4,7 +4,9 @@
 
 As far as I checked, there are no cool implementations of SeekBarPreference. So I decided to make one.
 
-![](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/SCREENSHOT-1.png)
+![on LOLIPOP](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/SCREENSHOT_LP_511.png)
+![on LOLIPOP with keyboard input](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/SCREENSHOT_LP_511_keyboard.png)
+![on ICS](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/SCREENSHOT_ICS_404.png)
 
 #Usage
 
