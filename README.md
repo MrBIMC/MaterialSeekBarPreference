@@ -36,7 +36,7 @@ As you can see, lib provides 4 custom attributes(minValue, maxValue, interval an
 Use them to define look and desired behavior of your preference.
 
 #Known bugs and planned features
-1. Seekbar is not themmable on pre-lollipop. I can fix it for API16+ though(through custom attribute for accent color).
+1. ~~Seekbar is not themmable on pre-lollipop.~~ DONE(v0.6+). Doesn't require anything from dev.
 2. No support of RTL yet.
 3. Small bug: It takes 2 taps on seekbar value indicator to open up the keyboard.
 
