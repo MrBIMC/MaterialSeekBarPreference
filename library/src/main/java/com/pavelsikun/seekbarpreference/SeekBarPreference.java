@@ -1,7 +1,14 @@
 package com.pavelsikun.seekbarpreference;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
 import android.preference.Preference;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -11,6 +18,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import static android.os.Build.VERSION.SDK_INT;
 
 public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarChangeListener, TextWatcher {
 
@@ -68,9 +77,35 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 
         mSeekBar.setProgress(mCurrentValue - mMinValue);
 
+        setSeekBarTintOnPreLollipop();
+
         if (!view.isEnabled()) {
             mSeekBar.setEnabled(false);
             mSeekBarValue.setEnabled(false);
+        }
+    }
+
+    static int pxFromDp(int dp, Context context) {
+        return (int) (dp * context.getResources().getDisplayMetrics().density);
+    }
+
+    void setSeekBarTintOnPreLollipop() { //TMP: I hope google will introduce native seekbar tinting for appcompat users
+        if(SDK_INT < 21) {
+            Resources.Theme theme = getContext().getTheme();
+
+            int attr =  R.attr.colorAccent;
+            int fallbackColor = Color.parseColor("#009688");
+            int accent = theme.obtainStyledAttributes(new int[]{attr}).getColor(0, fallbackColor);
+
+            ShapeDrawable thumb = new ShapeDrawable(new OvalShape());
+            thumb.setIntrinsicHeight(pxFromDp(15, getContext()));
+            thumb.setIntrinsicWidth(pxFromDp(15, getContext()));
+            thumb.setColorFilter(new PorterDuffColorFilter(accent, PorterDuff.Mode.SRC_ATOP));
+            mSeekBar.setThumb(thumb);
+
+            Drawable progress = mSeekBar.getProgressDrawable();
+            progress.setColorFilter(new PorterDuffColorFilter(accent, PorterDuff.Mode.MULTIPLY));
+            mSeekBar.setProgressDrawable(progress);
         }
     }
 

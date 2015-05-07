@@ -4,5 +4,7 @@
         <attr name="maxValue" format="integer"/>
         <attr name="interval" format="integer"/>
         <attr name="measurementUnit" format="string"/>
+
+        <!--<attr name="mp_colorAccent" format="reference|color"/>-->
     </declare-styleable>
 </resources>
