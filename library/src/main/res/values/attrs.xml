@@ -1,9 +1,9 @@
 <resources>
     <declare-styleable name="SeekBarPreference">
-        <attr name="minValue" format="integer"/>
-        <attr name="maxValue" format="integer"/>
-        <attr name="interval" format="integer"/>
-        <attr name="measurementUnit" format="string"/>
+        <attr name="minValue" format="reference|integer"/>
+        <attr name="maxValue" format="reference|integer"/>
+        <attr name="interval" format="reference|integer"/>
+        <attr name="measurementUnit" format="reference|string"/>
 
         <!--<attr name="mp_colorAccent" format="reference|color"/>-->
     </declare-styleable>

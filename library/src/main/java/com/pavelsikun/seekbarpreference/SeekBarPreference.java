@@ -25,8 +25,11 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 
     private final String TAG = getClass().getName();
 
-    private static final String APPLICATION_NS ="http://schemas.android.com/apk/res-auto";
-    private static final String ANDROID_NS = "http://schemas.android.com/apk/res/android";
+    private static final int DEFAULT_CURRENT_VALUE = 50;
+    private static final int DEFAULT_MIN_VALUE = 0;
+    private static final int DEFAULT_MAX_VALUE = 100;
+    private static final int DEFAULT_INTERVAL = 1;
+    private static final String DEFAULT_MEASUREMENT_UNIT = "";
 
     private int mMaxValue = 100;
     private int mMinValue = 0;
@@ -36,6 +39,13 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 
     private SeekBar mSeekBar;
     private EditText mSeekBarValue;
+
+
+    public SeekBarPreference(Context context) {
+        super(context);
+        setValuesFromXml(null);
+        setLayoutResource(R.layout.seekbar_preference);
+    }
 
     public SeekBarPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -50,14 +60,26 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     }
 
     private void setValuesFromXml(AttributeSet attrs) {
-        mMaxValue = attrs.getAttributeIntValue(APPLICATION_NS, "maxValue", 100);
-        mMinValue = attrs.getAttributeIntValue(APPLICATION_NS, "minValue", 0);
-        mCurrentValue = attrs.getAttributeIntValue(ANDROID_NS, "defaultValue", 50);
-
-        mMeasurementUnitValue = attrs.getAttributeValue(APPLICATION_NS, "measurementUnit");
-        if(mMeasurementUnitValue == null) mMeasurementUnitValue = "";
-
-        mInterval = attrs.getAttributeIntValue(APPLICATION_NS, "interval", 1);
+        if(attrs == null) {
+            mCurrentValue = DEFAULT_CURRENT_VALUE;
+            mMinValue = DEFAULT_MIN_VALUE;
+            mMaxValue = DEFAULT_MAX_VALUE;
+            mInterval = DEFAULT_INTERVAL;
+            mMeasurementUnitValue = DEFAULT_MEASUREMENT_UNIT;
+        } else {
+            mCurrentValue = attrs.getAttributeIntValue(android.R.attr.defaultValue, DEFAULT_CURRENT_VALUE);
+            TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.SeekBarPreference);
+            try {
+                mMinValue = a.getInt(R.styleable.SeekBarPreference_minValue, DEFAULT_MIN_VALUE);
+                mMaxValue = a.getInt(R.styleable.SeekBarPreference_maxValue, DEFAULT_MAX_VALUE);
+                mInterval = a.getInt(R.styleable.SeekBarPreference_interval, DEFAULT_INTERVAL);
+                mMeasurementUnitValue = a.getString(R.styleable.SeekBarPreference_measurementUnit);
+                if(mMeasurementUnitValue == null)
+                    mMeasurementUnitValue = DEFAULT_MEASUREMENT_UNIT;
+            } finally {
+                a.recycle();
+            }
+        }
     }
 
     @Override
