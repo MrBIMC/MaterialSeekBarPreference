@@ -20,7 +20,7 @@ Reference namespace on top of your preferences layout file:
     xmlns:sample="http://schemas.android.com/apk/res-auto">
 ````
 
-Now you can use this view in your preferences layout, just like any other normal preference:
+Now you can use this view in your preferences layout, just like any other normal preference.
 ```xml
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:key="your_pref_key"
@@ -34,13 +34,20 @@ Now you can use this view in your preferences layout, just like any other normal
         sample:measurementUnit="%"/>
 ````
 
-As you can see, lib provides 4 custom attributes(minValue, maxValue, interval and measurementUnit). 
+As you can see, lib provides 4 custom attributes(minValue, maxValue, interval and measurementUnit).
+measurementUnit is should be String or a reference to a String (measurementUnit="%"  or measurementUnit="@string/my_preference_unit").
+Every other attribute should be an Integer or reference to an Integer resource (interval="@integer/my_preference_interval" or interval="10").
 Use them to define look and desired behavior of your preference.
 
 #Known bugs and planned features
 1. ~~Seekbar is not themmable on pre-lollipop.~~ DONE(v0.6+).
 2. No support of RTL yet.
 3. Small bug: It takes 2 taps on seekbar value indicator to open up the keyboard.
+
+# Collaborators
+I'd really want to thank:
+
+* [krage](https://github.com/krage) for adding support for referenced resources.
 
 #Licence
 Lib is licenced under *MIT licence*, so you can do whatever you want with it.
