@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.preference.Preference;
+import android.support.annotation.NonNull;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -83,7 +84,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     }
 
     @Override
-    public void onBindView(View view) {
+    public void onBindView(@NonNull View view) {
         super.onBindView(view);
 
         mSeekBar = (SeekBar)view.findViewById(R.id.seekbar);
