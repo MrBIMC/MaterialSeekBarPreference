@@ -1,5 +1,6 @@
 package com.pavelsikun.seekbarpreference;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -9,6 +10,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
+import android.os.Build;
 import android.preference.Preference;
 import android.support.annotation.NonNull;
 import android.text.Editable;
@@ -60,6 +62,13 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
         setLayoutResource(R.layout.seekbar_preference);
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public SeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        setValuesFromXml(attrs);
+        setLayoutResource(R.layout.seekbar_preference);
+    }
+
     private void setValuesFromXml(AttributeSet attrs) {
         if(attrs == null) {
             mCurrentValue = DEFAULT_CURRENT_VALUE;
@@ -87,7 +96,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     public void onBindView(@NonNull View view) {
         super.onBindView(view);
 
-        mSeekBar = (SeekBar)view.findViewById(R.id.seekbar);
+        mSeekBar = (SeekBar) view.findViewById(R.id.seekbar);
         mSeekBar.setMax(mMaxValue - mMinValue);
         mSeekBar.setOnSeekBarChangeListener(this);
 
@@ -133,12 +142,12 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     }
 
     @Override
-    protected Object onGetDefaultValue(TypedArray ta, int index){
+    protected Object onGetDefaultValue(@NonNull TypedArray ta, int index){
         return ta.getInt(index, mCurrentValue);
     }
 
     @Override
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
+    protected void onSetInitialValue(boolean restoreValue, @NonNull Object defaultValue) {
         if(restoreValue) mCurrentValue = getPersistedInt(mCurrentValue);
         else {
             int temp = 0;
@@ -157,8 +166,13 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
         if(mSeekBarValue != null) mSeekBarValue.setEnabled(enabled);
     }
 
-    @Override
-    public boolean persistInt(int value) { return super.persistInt(value); }
+    public boolean setValue(int value) {
+        boolean isSuccess = super.persistInt(value);
+        notifyChanged();
+        return isSuccess;
+    }
+
+    public int getValue() { return mCurrentValue; }
 
     @Override
     public void onDependencyChanged(Preference dependency, boolean disableDependent) {
@@ -169,7 +183,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 
     //SeekBarListener:
     @Override
-    public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+    public void onProgressChanged(@NonNull SeekBar seekBar, int progress, boolean fromUser) {
         int newValue = progress + mMinValue;
 
         if(newValue > mMaxValue) newValue = mMaxValue;
@@ -196,20 +210,20 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     }
 
     @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
+    public void onStopTrackingTouch(@NonNull SeekBar seekBar) {
         notifyChanged();
         persistInt(mCurrentValue);
         mSeekBarValue.addTextChangedListener(this);
     }
 
-    //TextWatcher:
+    //TextWatcher
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
         mSeekBar.setOnSeekBarChangeListener(null);
     }
 
     @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {}
+    public void onTextChanged(@NonNull CharSequence s, int start, int before, int count) {}
 
     @Override
     public void afterTextChanged(Editable s) {
@@ -224,9 +238,8 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 
         mCurrentValue = value;
 
-        persistInt(mCurrentValue);
+        setValue(mCurrentValue);
         mSeekBar.setProgress(mCurrentValue - mMinValue);
-
         mSeekBar.setOnSeekBarChangeListener(this);
     }
 }

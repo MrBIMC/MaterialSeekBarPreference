@@ -15,8 +15,8 @@
         android:summary="This one is disabled!"
         android:enabled="false"
         android:defaultValue="5000"
-        sample:minValue="100"
-        sample:maxValue="10000"
+        sample:minValue="10000"
+        sample:maxValue="0"
         sample:interval="200"
         sample:measurementUnit="points"/>
 
@@ -33,8 +33,8 @@
         android:key="seekbar4"
         android:title="SeekbarPreference 4"
         android:summary="Press on number to input value using keyboard"
-        sample:minValue="0"
-        sample:maxValue="8888888"
+        sample:minValue="-1000"
+        sample:maxValue="-500"
         sample:measurementUnit="$"/>
 
 </PreferenceScreen>

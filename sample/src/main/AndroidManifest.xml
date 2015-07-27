@@ -5,17 +5,17 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:theme="@style/Theme.Application"
-        android:label="Sample">
+        android:label="Sample"
+        android:theme="@style/Theme.Application" >
         <activity
             android:name=".SettingsActivity"
-            android:label="Sample">
+            android:label="Sample" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
