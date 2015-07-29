@@ -38,10 +38,11 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     private int mMinValue = 0;
     private int mInterval = 1;
     private int mCurrentValue;
-    private String mMeasurementUnitValue;
+    private String mMeasurementUnit;
 
     private SeekBar mSeekBar;
     private EditText mSeekBarValue;
+    private TextView mMeasurementUnitView;
 
 
     public SeekBarPreference(Context context) {
@@ -75,7 +76,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
             mMinValue = DEFAULT_MIN_VALUE;
             mMaxValue = DEFAULT_MAX_VALUE;
             mInterval = DEFAULT_INTERVAL;
-            mMeasurementUnitValue = DEFAULT_MEASUREMENT_UNIT;
+            mMeasurementUnit = DEFAULT_MEASUREMENT_UNIT;
         } else {
             mCurrentValue = attrs.getAttributeIntValue(android.R.attr.defaultValue, DEFAULT_CURRENT_VALUE);
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.SeekBarPreference);
@@ -83,9 +84,9 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
                 mMinValue = a.getInt(R.styleable.SeekBarPreference_minValue, DEFAULT_MIN_VALUE);
                 mMaxValue = a.getInt(R.styleable.SeekBarPreference_maxValue, DEFAULT_MAX_VALUE);
                 mInterval = a.getInt(R.styleable.SeekBarPreference_interval, DEFAULT_INTERVAL);
-                mMeasurementUnitValue = a.getString(R.styleable.SeekBarPreference_measurementUnit);
-                if(mMeasurementUnitValue == null)
-                    mMeasurementUnitValue = DEFAULT_MEASUREMENT_UNIT;
+                mMeasurementUnit = a.getString(R.styleable.SeekBarPreference_measurementUnit);
+                if(mMeasurementUnit == null)
+                    mMeasurementUnit = DEFAULT_MEASUREMENT_UNIT;
             } finally {
                 a.recycle();
             }
@@ -104,8 +105,8 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
         mSeekBarValue.setText(String.valueOf(mCurrentValue));
         mSeekBarValue.addTextChangedListener(this);
 
-        TextView mMeasurementUnit = (TextView) view.findViewById(R.id.measurement_unit);
-        mMeasurementUnit.setText(mMeasurementUnitValue);
+        mMeasurementUnitView = (TextView) view.findViewById(R.id.measurement_unit);
+        mMeasurementUnitView.setText(mMeasurementUnit);
 
         mSeekBar.setProgress(mCurrentValue - mMinValue);
 
@@ -165,14 +166,6 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
         if(mSeekBar != null) mSeekBar.setEnabled(enabled);
         if(mSeekBarValue != null) mSeekBarValue.setEnabled(enabled);
     }
-
-    public boolean setValue(int value) {
-        boolean isSuccess = super.persistInt(value);
-        notifyChanged();
-        return isSuccess;
-    }
-
-    public int getValue() { return mCurrentValue; }
 
     @Override
     public void onDependencyChanged(Preference dependency, boolean disableDependent) {
@@ -242,4 +235,42 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
         mSeekBar.setProgress(mCurrentValue - mMinValue);
         mSeekBar.setOnSeekBarChangeListener(this);
     }
+
+    //public methods for manipulating this widget from java:
+    public void setCurrentValue(int value) {
+        mCurrentValue = value;
+        super.persistInt(value);
+        notifyChanged();
+    }
+
+    public int getCurrentValue() { return mCurrentValue; }
+
+
+    public void setMaxValue(int maxValue) {
+        mMaxValue = maxValue;
+        if(mSeekBar != null) mSeekBar.setMax(mMaxValue - mMinValue);
+    }
+
+    public int getMaxValue() { return mMaxValue; }
+
+
+    public void setMinValue(int minValue) {
+        mMinValue = minValue;
+        if(mSeekBar != null) mSeekBar.setMax(mMaxValue - mMinValue);
+    }
+
+    public int getMinValue() { return mMinValue; }
+
+
+    public void setInterval(int interval) { mInterval = interval; }
+
+    public int getInterval() { return mInterval; }
+
+
+    public void setMeasurementUnit(String measurementUnit) {
+        mMeasurementUnit = measurementUnit;
+        if(mMeasurementUnitView != null) mMeasurementUnitView.setText(mMeasurementUnit);
+    }
+
+    public String getMeasurementUnit() { return mMeasurementUnit; }
 }
