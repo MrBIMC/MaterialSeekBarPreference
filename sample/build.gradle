@@ -8,8 +8,8 @@ android {
         applicationId "com.pavelsikun.seekbarpreference.sample"
         minSdkVersion 11
         targetSdkVersion 22
-        versionCode 3
-        versionName "3.0"
+        versionCode 4
+        versionName "4.0"
     }
     buildTypes {
         release {
@@ -24,5 +24,5 @@ dependencies {
     compile project(':library')
 
 //    for your projects use:
-//    compile 'com.pavelsikun:material-seekbar-preference:0.8+'
+//    compile 'com.pavelsikun:material-seekbar-preference:0.9+'
 }

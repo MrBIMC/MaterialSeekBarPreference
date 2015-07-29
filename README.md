@@ -12,7 +12,7 @@ As far as I checked, there are no cool implementations of SeekBarPreference. So 
 
 Add this to your module dependencies:
 ```groovy
-    compile 'com.pavelsikun:material-seekbar-preference:0.8+'
+    compile 'com.pavelsikun:material-seekbar-preference:0.9+'
 ````
 
 Reference namespace on top of your preferences layout file:
