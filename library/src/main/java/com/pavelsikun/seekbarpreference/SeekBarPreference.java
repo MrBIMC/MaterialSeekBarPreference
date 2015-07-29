@@ -238,7 +238,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
 
         mCurrentValue = value;
 
-        setValue(mCurrentValue);
+        persistInt(mCurrentValue);
         mSeekBar.setProgress(mCurrentValue - mMinValue);
         mSeekBar.setOnSeekBarChangeListener(this);
     }
