@@ -71,7 +71,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     }
 
     private void setValuesFromXml(AttributeSet attrs) {
-        if(attrs == null) {
+        if (attrs == null) {
             mCurrentValue = DEFAULT_CURRENT_VALUE;
             mMinValue = DEFAULT_MIN_VALUE;
             mMaxValue = DEFAULT_MAX_VALUE;
@@ -81,11 +81,11 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
             mCurrentValue = attrs.getAttributeIntValue(android.R.attr.defaultValue, DEFAULT_CURRENT_VALUE);
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.SeekBarPreference);
             try {
-                mMinValue = a.getInt(R.styleable.SeekBarPreference_minValue, DEFAULT_MIN_VALUE);
-                mMaxValue = a.getInt(R.styleable.SeekBarPreference_maxValue, DEFAULT_MAX_VALUE);
-                mInterval = a.getInt(R.styleable.SeekBarPreference_interval, DEFAULT_INTERVAL);
-                mMeasurementUnit = a.getString(R.styleable.SeekBarPreference_measurementUnit);
-                if(mMeasurementUnit == null)
+                mMinValue = a.getInt(R.styleable.SeekBarPreference_msbp_minValue, DEFAULT_MIN_VALUE);
+                mMaxValue = a.getInt(R.styleable.SeekBarPreference_msbp_maxValue, DEFAULT_MAX_VALUE);
+                mInterval = a.getInt(R.styleable.SeekBarPreference_msbp_interval, DEFAULT_INTERVAL);
+                mMeasurementUnit = a.getString(R.styleable.SeekBarPreference_msbp_measurementUnit);
+                if (mMeasurementUnit == null)
                     mMeasurementUnit = DEFAULT_MEASUREMENT_UNIT;
             } finally {
                 a.recycle();
@@ -123,10 +123,10 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     }
 
     void setSeekBarTintOnPreLollipop() { //TMP: I hope google will introduce native seekbar tinting for appcompat users
-        if(SDK_INT < 21) {
+        if (SDK_INT < 21) {
             Resources.Theme theme = getContext().getTheme();
 
-            int attr =  R.attr.colorAccent;
+            int attr = R.attr.colorAccent;
             int fallbackColor = Color.parseColor("#009688");
             int accent = theme.obtainStyledAttributes(new int[]{attr}).getColor(0, fallbackColor);
 
@@ -143,17 +143,20 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     }
 
     @Override
-    protected Object onGetDefaultValue(@NonNull TypedArray ta, int index){
+    protected Object onGetDefaultValue(@NonNull TypedArray ta, int index) {
         return ta.getInt(index, mCurrentValue);
     }
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, @NonNull Object defaultValue) {
-        if(restoreValue) mCurrentValue = getPersistedInt(mCurrentValue);
+        if (restoreValue) mCurrentValue = getPersistedInt(mCurrentValue);
         else {
             int temp = 0;
-            try { temp = (Integer)defaultValue; }
-            catch(Exception ex) { Log.e(TAG, "Invalid default value: " + defaultValue.toString()); }
+            try {
+                temp = (Integer) defaultValue;
+            } catch (Exception ex) {
+                Log.e(TAG, "Invalid default value: " + defaultValue.toString());
+            }
 
             persistInt(temp);
             mCurrentValue = temp;
@@ -163,15 +166,15 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
-        if(mSeekBar != null) mSeekBar.setEnabled(enabled);
-        if(mSeekBarValue != null) mSeekBarValue.setEnabled(enabled);
+        if (mSeekBar != null) mSeekBar.setEnabled(enabled);
+        if (mSeekBarValue != null) mSeekBarValue.setEnabled(enabled);
     }
 
     @Override
     public void onDependencyChanged(Preference dependency, boolean disableDependent) {
         super.onDependencyChanged(dependency, disableDependent);
         if (mSeekBar != null) mSeekBar.setEnabled(!disableDependent);
-        if(mSeekBarValue != null) mSeekBarValue.setEnabled(!disableDependent);
+        if (mSeekBarValue != null) mSeekBarValue.setEnabled(!disableDependent);
     }
 
     //SeekBarListener:
@@ -179,15 +182,15 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     public void onProgressChanged(@NonNull SeekBar seekBar, int progress, boolean fromUser) {
         int newValue = progress + mMinValue;
 
-        if(newValue > mMaxValue) newValue = mMaxValue;
+        if (newValue > mMaxValue) newValue = mMaxValue;
 
-        else if(newValue < mMinValue) newValue = mMinValue;
+        else if (newValue < mMinValue) newValue = mMinValue;
 
-        else if(mInterval != 1 && newValue % mInterval != 0)
-            newValue = Math.round(((float)newValue)/mInterval) * mInterval;
+        else if (mInterval != 1 && newValue % mInterval != 0)
+            newValue = Math.round(((float) newValue) / mInterval) * mInterval;
 
         // change rejected, revert to the previous value
-        if(!callChangeListener(newValue)){
+        if (!callChangeListener(newValue)) {
             seekBar.setProgress(mCurrentValue - mMinValue);
             return;
         }
@@ -216,7 +219,8 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     }
 
     @Override
-    public void onTextChanged(@NonNull CharSequence s, int start, int before, int count) {}
+    public void onTextChanged(@NonNull CharSequence s, int start, int before, int count) {
+    }
 
     @Override
     public void afterTextChanged(Editable s) {
@@ -224,10 +228,11 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
         int value = mMinValue;
         try {
             value = Integer.parseInt(s.toString());
-            if(value > mMaxValue) value = mMaxValue;
-            else if(value < mMinValue) value = mMinValue;
+            if (value > mMaxValue) value = mMaxValue;
+            else if (value < mMinValue) value = mMinValue;
+        } catch (Exception e) {
+            Log.e(TAG, "non-integer data: " + s.toString());
         }
-        catch (Exception e) { Log.e(TAG, "non-integer data: " + s.toString()); }
 
         mCurrentValue = value;
 
@@ -243,34 +248,46 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
         notifyChanged();
     }
 
-    public int getCurrentValue() { return mCurrentValue; }
+    public int getCurrentValue() {
+        return mCurrentValue;
+    }
 
 
     public void setMaxValue(int maxValue) {
         mMaxValue = maxValue;
-        if(mSeekBar != null) mSeekBar.setMax(mMaxValue - mMinValue);
+        if (mSeekBar != null) mSeekBar.setMax(mMaxValue - mMinValue);
     }
 
-    public int getMaxValue() { return mMaxValue; }
+    public int getMaxValue() {
+        return mMaxValue;
+    }
 
 
     public void setMinValue(int minValue) {
         mMinValue = minValue;
-        if(mSeekBar != null) mSeekBar.setMax(mMaxValue - mMinValue);
+        if (mSeekBar != null) mSeekBar.setMax(mMaxValue - mMinValue);
     }
 
-    public int getMinValue() { return mMinValue; }
+    public int getMinValue() {
+        return mMinValue;
+    }
 
 
-    public void setInterval(int interval) { mInterval = interval; }
+    public void setInterval(int interval) {
+        mInterval = interval;
+    }
 
-    public int getInterval() { return mInterval; }
+    public int getInterval() {
+        return mInterval;
+    }
 
 
     public void setMeasurementUnit(String measurementUnit) {
         mMeasurementUnit = measurementUnit;
-        if(mMeasurementUnitView != null) mMeasurementUnitView.setText(mMeasurementUnit);
+        if (mMeasurementUnitView != null) mMeasurementUnitView.setText(mMeasurementUnit);
     }
 
-    public String getMeasurementUnit() { return mMeasurementUnit; }
+    public String getMeasurementUnit() {
+        return mMeasurementUnit;
+    }
 }

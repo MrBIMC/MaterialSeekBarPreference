@@ -1,40 +1,40 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:sample="http://schemas.android.com/apk/res-auto">
+                  xmlns:sample="http://schemas.android.com/apk/res-auto">
 
     <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:defaultValue="600"
         android:key="seekbar1"
         android:title="SeekbarPreference 1"
-        android:defaultValue="600"
-        sample:minValue="0"
-        sample:maxValue="1000"
-        sample:measurementUnit="ms"/>
+        sample:msbp_maxValue="1000"
+        sample:msbp_measurementUnit="ms"
+        sample:msbp_minValue="0"/>
 
     <com.pavelsikun.seekbarpreference.SeekBarPreference
-        android:key="seekbar2"
-        android:title="SeekbarPreference 2"
-        android:summary="This one is disabled!"
-        android:enabled="false"
         android:defaultValue="5000"
-        sample:minValue="10000"
-        sample:maxValue="0"
-        sample:interval="200"
-        sample:measurementUnit="points"/>
+        android:enabled="false"
+        android:key="seekbar2"
+        android:summary="This one is disabled!"
+        android:title="SeekbarPreference 2"
+        sample:msbp_interval="200"
+        sample:msbp_maxValue="0"
+        sample:msbp_measurementUnit="points"
+        sample:msbp_minValue="10000"/>
 
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:key="seekbar3"
-        android:title="SeekbarPreference 3"
         android:summary="You can define interval for seekbar"
-        sample:minValue="100"
-        sample:maxValue="10000"
-        sample:interval="200"
-        sample:measurementUnit="lemons"/>
+        android:title="SeekbarPreference 3"
+        sample:msbp_interval="200"
+        sample:msbp_maxValue="10000"
+        sample:msbp_measurementUnit="lemons"
+        sample:msbp_minValue="100"/>
 
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:key="seekbar4"
-        android:title="SeekbarPreference 4"
         android:summary="Press on number to input value using keyboard"
-        sample:minValue="-1000"
-        sample:maxValue="-500"
-        sample:measurementUnit="$"/>
+        android:title="SeekbarPreference 4"
+        sample:msbp_maxValue="-500"
+        sample:msbp_measurementUnit="$"
+        sample:msbp_minValue="-1000"/>
 
 </PreferenceScreen>
