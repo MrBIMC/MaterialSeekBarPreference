@@ -7,8 +7,8 @@ android {
     defaultConfig {
         minSdkVersion 11
         targetSdkVersion 22
-        versionCode 5
-        versionName "0.9"
+        versionCode 6
+        versionName "0.10"
     }
 }
 
@@ -19,7 +19,7 @@ dependencies {
 ext {
     PUBLISH_GROUP_ID = 'com.pavelsikun'
     PUBLISH_ARTIFACT_ID = 'material-seekbar-preference'
-    PUBLISH_VERSION = '0.9'
+    PUBLISH_VERSION = '0.10'
 }
 
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'

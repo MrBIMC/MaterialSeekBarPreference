@@ -20,9 +20,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:22.2.1'
     compile project(':library')
-
-//    for your projects use:
-//    compile 'com.pavelsikun:material-seekbar-preference:0.9+'
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    //    for your projects use:
+    //    compile 'com.pavelsikun:material-seekbar-preference:0.10+'
 }
