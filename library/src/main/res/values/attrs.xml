@@ -1,8 +1,8 @@
 <resources>
     <declare-styleable name="SeekBarPreference">
-        <attr name="minValue" format="reference|integer"/>
-        <attr name="maxValue" format="reference|integer"/>
-        <attr name="interval" format="reference|integer"/>
-        <attr name="measurementUnit" format="reference|string"/>
+        <attr name="msbp_minValue" format="reference|integer"/>
+        <attr name="msbp_maxValue" format="reference|integer"/>
+        <attr name="msbp_interval" format="reference|integer"/>
+        <attr name="msbp_measurementUnit" format="reference|string"/>
     </declare-styleable>
 </resources>
