@@ -4,5 +4,8 @@
         <attr name="msbp_maxValue" format="reference|integer"/>
         <attr name="msbp_interval" format="reference|integer"/>
         <attr name="msbp_measurementUnit" format="reference|string"/>
+
+        <attr name="msbp_title" format="reference|string"/>
+        <attr name="msbp_summary" format="reference|string"/>
     </declare-styleable>
 </resources>

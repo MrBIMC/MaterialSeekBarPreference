@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main"
+    android:orientation="vertical"
+    tools:context="com.pavelsikun.seekbarpreference.sample.MainActivity">
+
+    <Button
+        android:id="@+id/uselessTempButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="open Settings(preference demo)"
+        style="?borderlessButtonStyle"
+        android:onClick="loadSettingsActivity"/>
+
+    <TextView
+        android:text="View demo:"
+        android:textColor="@color/accent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.pavelsikun.seekbarpreference.MaterialSeekBarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:msbp_interval="200"
+        app:msbp_maxValue="10000"
+        app:msbp_measurementUnit="points"
+        app:msbp_minValue="100"
+        app:msbp_title="Test View"
+        app:msbp_summary="Once upon a time we had a view"/>
+
+    <com.pavelsikun.seekbarpreference.MaterialSeekBarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:msbp_interval="200"
+        app:msbp_maxValue="0"
+        app:msbp_measurementUnit="bananas"
+        app:msbp_minValue="-2000"
+        app:msbp_title="Test View 2"
+        app:msbp_summary="Once upon a time we had a view"/>
+
+</LinearLayout>

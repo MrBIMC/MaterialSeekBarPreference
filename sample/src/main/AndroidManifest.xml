@@ -6,16 +6,20 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Sample"
-        android:theme="@style/Theme.Application" >
+        android:theme="@style/Theme.Application">
         <activity
-            android:name=".SettingsActivity"
-            android:label="Sample"
-            android:windowSoftInputMode="adjustPan">
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/Theme.Application.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="Settings"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

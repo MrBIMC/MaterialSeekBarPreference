@@ -1,15 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "com.pavelsikun.seekbarpreference.sample"
         minSdkVersion 11
-        targetSdkVersion 22
-        versionCode 4
-        versionName "4.0"
+        targetSdkVersion 23
+        versionCode 5
+        versionName "5.0"
     }
     buildTypes {
         release {
@@ -21,7 +21,9 @@ android {
 
 dependencies {
     compile project(':library')
-    compile 'com.android.support:appcompat-v7:22.2.1'
     //    for your projects use:
-    //    compile 'com.pavelsikun:material-seekbar-preference:0.10+'
+    //    compile 'com.pavelsikun:material-seekbar-preference:0.11.+'
+
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.android.support:design:23.0.1'
 }

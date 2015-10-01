@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.preference.PreferenceFragment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -22,13 +21,14 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         FrameLayout frame = new FrameLayout(this);
+        frame.setLayoutParams(new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
 
         if(Build.VERSION.SDK_INT > 16) frame.setId(generateViewId());
         else //noinspection ResourceType
             frame.setId(676442);
 
-        setContentView(frame, new FrameLayout.LayoutParams(
-                FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
+        setContentView(frame);
 
         getFragmentManager()
         .beginTransaction()
@@ -78,8 +78,10 @@ public class SettingsActivity extends AppCompatActivity {
                     seekBarPreference1.setInterval(1);
                     seekBarPreference1.setCurrentValue(777);
                     seekBarPreference1.setMeasurementUnit("<- changed!");
-                    Toast.makeText(getActivity(), "SeekbarPreference params changed!",
-                            Toast.LENGTH_LONG).show();
+                    if(getActivity() != null) {
+                        Toast.makeText(getActivity(), "SeekbarPreference params changed!",
+                                Toast.LENGTH_LONG).show();
+                    }
                 }
             }.execute();
         }
