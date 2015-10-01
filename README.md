@@ -12,10 +12,10 @@ As far as I checked, there are no cool implementations of SeekBarPreference. So 
 
 Add this to your module dependencies:
 ```groovy
-    compile 'com.pavelsikun:material-seekbar-preference:0.10+'
+    compile 'com.pavelsikun:material-seekbar-preference:0.11+'
 ````
 
-Reference namespace on top of your preferences layout file:
+Reference namespace on top of your layout file:
 ```xml
     xmlns:sample="http://schemas.android.com/apk/res-auto">
 ````
@@ -33,11 +33,24 @@ Now you can use this view in your preferences layout, just like any other normal
         sample:msbp_interval="200"
         sample:msbp_measurementUnit="%"/>
 ````
+Or use MaterialSeekBarView if you prefer to use views instead of preferences:
+```xml
+    <com.pavelsikun.seekbarpreference.MaterialSeekBarView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:msbp_interval="200"
+        app:msbp_maxValue="0"
+        app:msbp_measurementUnit="bananas"
+        app:msbp_minValue="-2000"
+        app:msbp_title="Test View"
+        app:msbp_summary="with views we can't use android:summary :("/>
+```
 
-As you can see, lib provides 4 custom attributes(msbp_minValue, msbp_maxValue, msbp_interval and msbp_measurementUnit).
+As you can see, lib provides 6 custom attributes(msbp_minValue, msbp_maxValue, msbp_interval and msbp_measurementUnit, msbp_title, psbp_summary).
+(msbp_title, psbp_summary are used with View, because android:title and android:summary accessible only from preference)
 measurementUnit is should be String or a reference to a String (measurementUnit="%"  or measurementUnit="@string/my_preference_unit").
 Every other attribute should be an Integer or reference to an Integer resource (interval="@integer/my_preference_interval" or interval="10").
-Use them to define look and desired behavior of your preference. Prefixes used to avoid attribute collisions with other libs.
+Use them to define look and desired behavior. Prefixes used to avoid attribute collisions with other libs.
 
 #Known bugs and planned features
 1. No support of RTL yet.
