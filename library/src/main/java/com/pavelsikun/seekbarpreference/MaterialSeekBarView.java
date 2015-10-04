@@ -66,6 +66,11 @@ public class MaterialSeekBarView extends FrameLayout {
         mController = new MaterialSeekBarController(getContext(), attrs, view, mPersistable);
     }
 
+    public void setOnPersistListener(Persistable persistable) {
+        mPersistable = persistable;
+        mController.setOnPersistListener(mPersistable);
+    }
+
     public String getMeasurementUnit() {
         return mController.getMeasurementUnit();
     }

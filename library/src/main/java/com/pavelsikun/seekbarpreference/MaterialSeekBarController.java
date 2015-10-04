@@ -97,6 +97,10 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
         }
     }
 
+    public void setOnPersistListener(Persistable persistable) {
+        mPersistable = persistable;
+    }
+
     public void onBindView(@NonNull View view) {
 
         mSeekBar = (SeekBar) view.findViewById(com.pavelsikun.seekbarpreference.R.id.seekbar);
