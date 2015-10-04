@@ -9,7 +9,7 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class SeekBarPreference extends Preference {
+public class SeekBarPreference extends Preference implements Persistable {
 
     private MaterialSeekBarController mController;
 
@@ -36,7 +36,7 @@ public class SeekBarPreference extends Preference {
 
     private void init(AttributeSet attrs) {
         setLayoutResource(R.layout.seekbar_preference);
-        mController = new MaterialSeekBarController(getContext(), attrs);
+        mController = new MaterialSeekBarController(getContext(), attrs, this);
     }
 
     @Override
@@ -53,7 +53,9 @@ public class SeekBarPreference extends Preference {
 
     @Override
     protected void onSetInitialValue(boolean restoreValue, @NonNull Object defaultValue) {
-        mController.onSetInitialValue(restoreValue, defaultValue);
+        int average = (mController.getMaxValue() - mController.getMinValue()) / 2;
+        if(restoreValue) mController.setCurrentValue(getPersistedInt(average));
+        else mController.onSetInitialValue(restoreValue, defaultValue);
     }
 
     @Override
@@ -66,6 +68,12 @@ public class SeekBarPreference extends Preference {
     public void onDependencyChanged(Preference dependency, boolean disableDependent) {
         super.onDependencyChanged(dependency, disableDependent);
         mController.onDependencyChanged(dependency, disableDependent);
+    }
+
+    @Override
+    public void onPersist(int value) {
+        persistInt(value);
+        notifyChanged();
     }
 
     public String getMeasurementUnit() {
@@ -106,7 +114,5 @@ public class SeekBarPreference extends Preference {
 
     public void setCurrentValue(int value) {
         mController.setCurrentValue(value);
-        super.persistInt(value);
-        notifyChanged();
     }
 }

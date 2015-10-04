@@ -51,23 +51,17 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
 
     private Context mContext;
 
-    public MaterialSeekBarController(Context context) {
-        mContext = context;
-        init(null, null);
-    }
+    private Persistable mPersistable;
 
-    public MaterialSeekBarController(Context context, View view) {
+    public MaterialSeekBarController(Context context, AttributeSet attrs, Persistable persistable) {
         mContext = context;
-        init(null, view);
-    }
-
-    public MaterialSeekBarController(Context context, AttributeSet attrs) {
-        mContext = context;
+        mPersistable = persistable;
         init(attrs, null);
     }
 
-    public MaterialSeekBarController(Context context, AttributeSet attrs, View view) {
+    public MaterialSeekBarController(Context context, AttributeSet attrs, View view, Persistable persistable) {
         mContext = context;
+        mPersistable = persistable;
         init(attrs, view);
     }
 
@@ -190,7 +184,7 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
             newValue = Math.round(((float) newValue) / mInterval) * mInterval;
 
         // change accepted, store it
-        setCurrentValue(newValue);
+        mCurrentValue = newValue;
         mSeekBarValue.setText(String.valueOf(newValue));
     }
 
@@ -235,6 +229,7 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
     //public methods for manipulating this widget from java:
     public void setCurrentValue(int value) {
         mCurrentValue = value;
+        if(mPersistable != null) mPersistable.onPersist(value);
     }
 
     public int getCurrentValue() {

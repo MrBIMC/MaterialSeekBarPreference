@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 public class MaterialSeekBarView extends FrameLayout {
 
     private MaterialSeekBarController mController;
+    private Persistable mPersistable;
 
     public MaterialSeekBarView(Context context) {
         super(context);
@@ -35,9 +36,34 @@ public class MaterialSeekBarView extends FrameLayout {
         init(attrs);
     }
 
+    public MaterialSeekBarView(Context context, Persistable persistable) {
+        super(context);
+        mPersistable = persistable;
+        init(null);
+    }
+
+    public MaterialSeekBarView(Context context, AttributeSet attrs, Persistable persistable) {
+        super(context, attrs);
+        mPersistable = persistable;
+        init(attrs);
+    }
+
+    public MaterialSeekBarView(Context context, AttributeSet attrs, int defStyleAttr, Persistable persistable) {
+        super(context, attrs, defStyleAttr);
+        mPersistable = persistable;
+        init(attrs);
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    public MaterialSeekBarView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes, Persistable persistable) {
+        super(context, attrs, defStyleAttr, defStyleRes);
+        mPersistable = persistable;
+        init(attrs);
+    }
+
     void init(AttributeSet attrs) {
         View view = inflate(getContext(), R.layout.seekbar_preference, this);
-        mController = new MaterialSeekBarController(getContext(), attrs, view);
+        mController = new MaterialSeekBarController(getContext(), attrs, view, mPersistable);
     }
 
     public String getMeasurementUnit() {
