@@ -47,8 +47,7 @@ public class SeekBarPreference extends Preference implements Persistable {
 
     @Override
     protected Object onGetDefaultValue(@NonNull TypedArray ta, int index) {
-        if(mController != null) return ta.getInt(index, mController.getCurrentValue());
-        else return null;
+        return ta.getInt(index, 50);
     }
 
     @Override
