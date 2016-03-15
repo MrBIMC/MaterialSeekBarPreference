@@ -110,4 +110,12 @@ public class MaterialSeekBarView extends FrameLayout {
     public void setCurrentValue(int value) {
         mController.setCurrentValue(value);
     }
+
+    public int getValueTextSize() {
+        return mController.getCurrentValue();
+    }
+
+    public void setValueTextSize(int textSize) {
+        mController.setValueTextSize(textSize);
+    }
 }
