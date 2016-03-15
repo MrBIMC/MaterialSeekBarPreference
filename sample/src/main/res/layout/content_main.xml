@@ -45,6 +45,7 @@
         app:msbp_measurementUnit="bananas"
         app:msbp_minValue="-2000"
         app:msbp_title="Test View 2"
+        app:msbp_valueTextSize="18sp"
         app:msbp_summary="Once upon a time we had a view"/>
 
 </LinearLayout>

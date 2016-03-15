@@ -16,6 +16,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.SeekBar;
@@ -35,6 +36,7 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
     private static final int DEFAULT_MAX_VALUE = 100;
     private static final int DEFAULT_INTERVAL = 1;
     private static final String DEFAULT_MEASUREMENT_UNIT = "";
+    private static final int DEFAULT_TEXT_SIZE = 12;
 
     private int mMaxValue;
     private int mMinValue;
@@ -45,6 +47,8 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
     private SeekBar mSeekBar;
     private EditText mSeekBarValue;
     private TextView mMeasurementUnitView;
+
+    private int mTextSize;
 
     private String mTitle;
     private String mSummary;
@@ -71,11 +75,14 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
     }
     private void setValuesFromXml(@Nullable AttributeSet attrs) {
         if (attrs == null) {
-            mCurrentValue = DEFAULT_CURRENT_VALUE;
-            mMinValue = DEFAULT_MIN_VALUE;
-            mMaxValue = DEFAULT_MAX_VALUE;
-            mInterval = DEFAULT_INTERVAL;
-            mMeasurementUnit = DEFAULT_MEASUREMENT_UNIT;
+            mCurrentValue       = DEFAULT_CURRENT_VALUE;
+            mMinValue           = DEFAULT_MIN_VALUE;
+            mMaxValue           = DEFAULT_MAX_VALUE;
+            mInterval           = DEFAULT_INTERVAL;
+            mMeasurementUnit    = DEFAULT_MEASUREMENT_UNIT;
+            mTextSize           = DEFAULT_TEXT_SIZE;
+
+
         } else {
             TypedArray a = mContext.obtainStyledAttributes(attrs, com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference);
             try {
@@ -86,6 +93,8 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
 
                 mTitle = a.getString(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_title);
                 mSummary = a.getString(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_summary);
+
+                mTextSize = a.getDimensionPixelSize(R.styleable.SeekBarPreference_msbp_valueTextSize, pxFromDp(DEFAULT_TEXT_SIZE, mContext));
 
                 if(mCurrentValue < mMinValue) mCurrentValue = (mMaxValue - mMinValue) / 2;
                 mMeasurementUnit = a.getString(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_measurementUnit);
@@ -110,6 +119,7 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
         mSeekBarValue = (EditText) view.findViewById(com.pavelsikun.seekbarpreference.R.id.seekbar_value);
         mSeekBarValue.setText(String.valueOf(mCurrentValue));
         mSeekBarValue.addTextChangedListener(this);
+        mSeekBarValue.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
 
         mMeasurementUnitView = (TextView) view.findViewById(com.pavelsikun.seekbarpreference.R.id.measurement_unit);
         mMeasurementUnitView.setText(mMeasurementUnit);
