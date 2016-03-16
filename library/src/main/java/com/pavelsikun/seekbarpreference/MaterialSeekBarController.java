@@ -1,33 +1,27 @@
 package com.pavelsikun.seekbarpreference;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
 import android.preference.Preference;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
-import static android.os.Build.VERSION.SDK_INT;
+import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
 /**
  * Created by mrbimc on 30.09.15.
  */
-public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBarChangeListener {
+public class MaterialSeekBarController implements TextWatcher, DiscreteSeekBar.OnProgressChangeListener {
 
     private final String TAG = getClass().getName();
 
@@ -44,9 +38,11 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
     private int mCurrentValue;
     private String mMeasurementUnit;
 
-    private SeekBar mSeekBar;
+    private DiscreteSeekBar mSeekBar;
     private EditText mSeekBarValue;
     private TextView mMeasurementUnitView;
+    private TextView mTitleTxt;
+    private TextView mSummaryTxt;
 
     private int mValueTextSize;
 
@@ -89,6 +85,7 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
                 mMinValue = a.getInt(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_minValue, DEFAULT_MIN_VALUE);
                 mMaxValue = a.getInt(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_maxValue, DEFAULT_MAX_VALUE);
                 mInterval = a.getInt(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_interval, DEFAULT_INTERVAL);
+
                 mCurrentValue = attrs.getAttributeIntValue(android.R.attr.defaultValue, DEFAULT_CURRENT_VALUE);
 
                 mTitle = a.getString(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_title);
@@ -112,53 +109,35 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
 
     public void onBindView(@NonNull View view) {
 
-        mSeekBar = (SeekBar) view.findViewById(com.pavelsikun.seekbarpreference.R.id.seekbar);
-        mSeekBar.setMax(mMaxValue - mMinValue);
-        mSeekBar.setOnSeekBarChangeListener(this);
+        mSeekBar = (DiscreteSeekBar) view.findViewById(com.pavelsikun.seekbarpreference.R.id.seekbar);
+
+        mSeekBar.setMin(mMinValue);
+        mSeekBar.setMax(mMaxValue);
+        mSeekBar.setOnProgressChangeListener(this);
 
         mSeekBarValue = (EditText) view.findViewById(com.pavelsikun.seekbarpreference.R.id.seekbar_value);
         mSeekBarValue.setText(String.valueOf(mCurrentValue));
         mSeekBarValue.addTextChangedListener(this);
         setValueTextSize(mValueTextSize);
+        setMaxTextLength();
 
         mMeasurementUnitView = (TextView) view.findViewById(com.pavelsikun.seekbarpreference.R.id.measurement_unit);
         mMeasurementUnitView.setText(mMeasurementUnit);
 
-        mSeekBar.setProgress(mCurrentValue - mMinValue);
-
-        setSeekBarTintOnPreLollipop();
+        // Don't move this line
+        mSeekBar.setProgress(mCurrentValue);
 
         if (!view.isEnabled()) {
             mSeekBar.setEnabled(false);
             mSeekBarValue.setEnabled(false);
         }
 
+        mTitleTxt = (TextView) view.findViewById(android.R.id.title);
+        mSummaryTxt = (TextView) view.findViewById(android.R.id.summary);
+
         if(mTitle != null || mSummary != null) {
-            TextView title = (TextView) view.findViewById(android.R.id.title);
-            TextView summary = (TextView) view.findViewById(android.R.id.summary);
-
-            if(mTitle != null) title.setText(mTitle);
-            if(mSummary != null) summary.setText(mSummary);
-        }
-    }
-
-    void setSeekBarTintOnPreLollipop() { //TMP: I hope google will introduce native seekbar tinting for appcompat users
-        if (SDK_INT < 21) {
-            Resources.Theme theme = mContext.getTheme();
-
-            int attr = com.pavelsikun.seekbarpreference.R.attr.colorAccent;
-            int fallbackColor = Color.parseColor("#009688");
-            int accent = theme.obtainStyledAttributes(new int[]{attr}).getColor(0, fallbackColor);
-
-            ShapeDrawable thumb = new ShapeDrawable(new OvalShape());
-            thumb.setIntrinsicHeight(pxFromDp(15, mContext));
-            thumb.setIntrinsicWidth(pxFromDp(15, mContext));
-            thumb.setColorFilter(new PorterDuffColorFilter(accent, PorterDuff.Mode.SRC_ATOP));
-            mSeekBar.setThumb(thumb);
-
-            Drawable progress = mSeekBar.getProgressDrawable();
-            progress.setColorFilter(new PorterDuffColorFilter(accent, PorterDuff.Mode.MULTIPLY));
-            mSeekBar.setProgressDrawable(progress);
+            if(mTitle != null) mTitleTxt.setText(mTitle);
+            if(mSummary != null) mSummaryTxt.setText(mSummary);
         }
     }
 
@@ -187,28 +166,19 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
 
     //SeekBarListener:
     @Override
-    public void onProgressChanged(@NonNull SeekBar seekBar, int progress, boolean fromUser) {
-        int newValue = progress + mMinValue;
-
-        if (newValue > mMaxValue) newValue = mMaxValue;
-
-        else if (newValue < mMinValue) newValue = mMinValue;
-
-        else if (mInterval != 1 && newValue % mInterval != 0)
-            newValue = Math.round(((float) newValue) / mInterval) * mInterval;
-
-        // change accepted, store it
-        mCurrentValue = newValue;
-        mSeekBarValue.setText(String.valueOf(newValue));
+    public void onProgressChanged(DiscreteSeekBar discreteSeekBar, int progress, boolean fromUser) {
+        setError(null);
+        mCurrentValue = progress;
+        mSeekBarValue.setText(String.valueOf(progress));
     }
 
     @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
+    public void onStartTrackingTouch(DiscreteSeekBar discreteSeekBar) {
         mSeekBarValue.removeTextChangedListener(this);
     }
 
     @Override
-    public void onStopTrackingTouch(@NonNull SeekBar seekBar) {
+    public void onStopTrackingTouch(DiscreteSeekBar discreteSeekBar) {
         mSeekBarValue.addTextChangedListener(this);
         setCurrentValue(mCurrentValue);
     }
@@ -216,7 +186,7 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
     //TextWatcher
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        mSeekBar.setOnSeekBarChangeListener(null);
+        mSeekBar.setOnProgressChangeListener(null);
     }
 
     @Override
@@ -225,24 +195,50 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
 
     @Override
     public void afterTextChanged(Editable s) {
-        Log.d(TAG, "after text changed");
         int value = mMinValue;
+
         try {
             value = Integer.parseInt(s.toString());
-            if (value > mMaxValue) value = mMaxValue;
-            else if (value < mMinValue) value = mMinValue;
-        } catch (Exception e) {
-            Log.e(TAG, "non-integer data: " + s.toString());
         }
+        catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        setError(null);
         setCurrentValue(value);
-        mSeekBar.setProgress(mCurrentValue - mMinValue);
-        mSeekBar.setOnSeekBarChangeListener(this);
+
+        if( value > mMaxValue )
+            showValueTextError();
+
+        mSeekBar.setOnProgressChangeListener(this);
     }
 
+    private void setMaxTextLength() {
+        int maxTextLength = String.valueOf(mMaxValue).length();
+        InputFilter[] fArray = new InputFilter[1];
+        fArray[0] = new InputFilter.LengthFilter(maxTextLength);
+        mSeekBarValue.setFilters(fArray);
+    }
+
+    public void showValueTextError() {
+        StringBuilder errorBuilder = new StringBuilder(mContext.getString(R.string.errors_must_be_between));
+        errorBuilder.append(" " + mMinValue + " " + mMeasurementUnit);
+        errorBuilder.append(" " + mContext.getString(R.string.errors_and).toLowerCase());
+        errorBuilder.append(" " + mMaxValue + " " + mMeasurementUnit);
+        setError(errorBuilder.toString());
+    }
+
+    public void setError(String error) {
+        mSeekBarValue.setError(error);
+
+        int textColor = error == null ? android.R.color.black : android.R.color.holo_red_light;
+        mSeekBarValue.setTextColor(ContextCompat.getColor(mContext, textColor));
+    }
 
     //public methods for manipulating this widget from java:
     public void setCurrentValue(int value) {
         mCurrentValue = value;
+        mSeekBar.setProgress(value);
         if(mPersistable != null) mPersistable.onPersist(value);
     }
 
@@ -250,26 +246,24 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
         return mCurrentValue;
     }
 
-
     public void setMaxValue(int maxValue) {
         mMaxValue = maxValue;
-        if (mSeekBar != null) mSeekBar.setMax(mMaxValue - mMinValue);
+        setMaxTextLength();
+        if (mSeekBar != null) mSeekBar.setMax(mMaxValue);
     }
 
     public int getMaxValue() {
         return mMaxValue;
     }
 
-
     public void setMinValue(int minValue) {
         mMinValue = minValue;
-        if (mSeekBar != null) mSeekBar.setMax(mMaxValue - mMinValue);
+        if (mSeekBar != null) mSeekBar.setMin(mMinValue);
     }
 
     public int getMinValue() {
         return mMinValue;
     }
-
 
     public void setInterval(int interval) {
         mInterval = interval;
@@ -278,7 +272,6 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
     public int getInterval() {
         return mInterval;
     }
-
 
     public void setMeasurementUnit(String measurementUnit) {
         mMeasurementUnit = measurementUnit;
@@ -296,6 +289,24 @@ public class MaterialSeekBarController implements TextWatcher, SeekBar.OnSeekBar
     public void setValueTextSize(int mTextSize) {
         this.mValueTextSize = mTextSize;
         this.mSeekBarValue.setTextSize(TypedValue.COMPLEX_UNIT_PX, mTextSize);
+    }
+
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public void setTitle(String title) {
+        this.mTitle = title;
+        this.mTitleTxt.setText(title);
+    }
+
+    public String getSummary() {
+        return mSummary;
+    }
+
+    public void setSummary(String summary) {
+        this.mSummary = summary;
+        this.mSummaryTxt.setText(summary);
     }
 
     static int pxFromDp(int dp, Context context) {

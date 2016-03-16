@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="errors.must_be_between">Dev\'essere tra</string>
+    <string name="errors.and">E</string>
+</resources>
