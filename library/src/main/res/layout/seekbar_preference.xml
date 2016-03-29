@@ -45,9 +45,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:textSize="14sp"
-                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
                 android:singleLine="true"/>
+
             <TextView
                 android:id="@+id/measurement_unit"
                 android:layout_width="wrap_content"
@@ -55,7 +56,8 @@
                 android:textSize="14sp"
                 android:textColor="?android:attr/textColorSecondary"/>
         </LinearLayout>
-        <SeekBar
+
+        <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
             android:id="@+id/seekbar"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/value_holder"

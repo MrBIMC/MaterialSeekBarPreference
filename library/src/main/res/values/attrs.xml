@@ -1,5 +1,6 @@
 <resources>
     <declare-styleable name="SeekBarPreference">
+        <attr name="msbp_valueTextSize" format="dimension" />
         <attr name="msbp_minValue" format="reference|integer"/>
         <attr name="msbp_maxValue" format="reference|integer"/>
         <attr name="msbp_interval" format="reference|integer"/>
