@@ -86,7 +86,7 @@ public class MaterialSeekBarController implements TextWatcher, DiscreteSeekBar.O
                 mMaxValue = a.getInt(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_maxValue, DEFAULT_MAX_VALUE);
                 mInterval = a.getInt(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_interval, DEFAULT_INTERVAL);
 
-                mCurrentValue = attrs.getAttributeIntValue(android.R.attr.defaultValue, DEFAULT_CURRENT_VALUE);
+                mCurrentValue = attrs.getAttributeIntValue("http://schemas.android.com/apk/res/android", "defaultValue", DEFAULT_CURRENT_VALUE);
 
                 mTitle = a.getString(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_title);
                 mSummary = a.getString(com.pavelsikun.seekbarpreference.R.styleable.SeekBarPreference_msbp_summary);
