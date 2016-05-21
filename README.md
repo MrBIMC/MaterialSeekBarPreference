@@ -96,6 +96,7 @@ I'd really want to thank:
 
 * [krage](https://github.com/krage) for adding support for referenced resources.
 * [NitroG42](https://github.com/NitroG42) for pointing out to attribute collisions.
+* [Dmytro Karataiev](https://github.com/dmytroKarataiev) for a fix for defaultValue.
 
 #Licence
 Lib is licenced under *Apache2 licence*, so you can do whatever you want with it.
