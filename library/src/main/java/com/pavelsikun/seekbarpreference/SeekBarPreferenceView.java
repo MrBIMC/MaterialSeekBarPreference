@@ -93,7 +93,8 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
 
                 measurementUnit = a.getString(R.styleable.SeekBarPreference_msbp_measurementUnit);
 
-                dialogStyle = a.getInt(R.styleable.SeekBarPreference_msbp_dialogStyle, DEFAULT_DIALOG_STYLE);
+//                dialogStyle = a.getInt(R.styleable.SeekBarPreference_msbp_dialogStyle, DEFAULT_DIALOG_STYLE);
+                dialogStyle = DEFAULT_DIALOG_STYLE;
 
                 title = a.getString(R.styleable.SeekBarPreference_msbp_view_title);
                 summary = a.getString(R.styleable.SeekBarPreference_msbp_view_summary);

@@ -4,9 +4,9 @@
 
 As far as I checked, there are no cool implementations of SeekBarPreference. So I decided to make one.
 
-![on LOLIPOP](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/SCREENSHOT_LP_511.png)
-![on LOLIPOP with keyboard input](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/SCREENSHOT_LP_511_keyboard.png)
-![on ICS](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/SCREENSHOT_ICS_404.png)
+![](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_1.png)
+![](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_2.png)
+![](https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_3.png)
 
 #Usage
 
@@ -28,33 +28,64 @@ Now you can use this view in your preferences layout, just like any other normal
         android:summary="Some summary"
         android:enabled="false"
         android:defaultValue="5000"
+
         sample:msbp_minValue="100"
         sample:msbp_maxValue="10000"
         sample:msbp_interval="200"
-        sample:msbp_measurementUnit="%"
-        sample:msbp_dialogStyle=""/>
+        sample:msbp_measurementUnit="%" />
 ````
 Or use MaterialSeekBarView if you prefer to use views instead of preferences:
 ```xml
     <com.pavelsikun.seekbarpreference.MaterialSeekBarView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         app:msbp_interval="200"
         app:msbp_maxValue="0"
         app:msbp_measurementUnit="bananas"
         app:msbp_minValue="-2000"
-        app:msbp_title="Test View"
-        app:msbp_summary="with views we can't use android:summary :("/>
+
+        app:msbp_view_title="SeekBarPreferenceView Example"
+        app:msbp_view_summary="As you can see, view uses a bit different xml-attributes for some things"/>
+        app:msbp_view_enabled="false"
+        app:msbp_view_defaultValue="0" />
 ```
 
-As you can see, lib provides 6 custom attributes(msbp_minValue, msbp_maxValue, msbp_interval and msbp_measurementUnit, msbp_title, psbp_summary).
-(msbp_title, psbp_summary are used with View, because android:title and android:summary accessible only from preference)
-measurementUnit is should be String or a reference to a String (measurementUnit="%"  or measurementUnit="@string/my_preference_unit").
-Every other attribute should be an Integer or reference to an Integer resource (interval="@integer/my_preference_interval" or interval="10").
-Use them to define look and desired behavior. Prefixes used to avoid attribute collisions with other libs.
+Either of way, View/Preference provides next methods to modify and manage it from Java:
+```java
+    public int getMaxValue();
+    public void setMaxValue(int maxValue);
 
-#Known bugs and planned features
-1. No support of RTL yet.
+    public int getMinValue();
+    public void setMinValue(int minValue);
+
+    public String getTitle();
+    public void setTitle(String title);
+
+    public String getSummary();
+    public void setSummary(String summary);
+
+    public boolean isEnabled();
+    public void setEnabled(boolean enabled);
+
+    public int getInterval();
+    public void setInterval(int interval);
+
+    public int getCurrentValue();
+    public void setCurrentValue(int currentValue);
+
+    public String getMeasurementUnit();
+    public void setMeasurementUnit(String measurementUnit);
+
+    public void setDialogStyle(int dialogStyle);
+
+    // AND for view-only(at least for now), there's a way to get a callback whenever value changes:
+    public void setOnValueSelectedListener(OnValueSelectedListener onValueSelectedListener);
+```
+
+As you can see, lib provides 4 universal custom attributes(msbp_minValue, msbp_maxValue, msbp_interval and msbp_measurementUnit).
+There are also 4 additional attributes for view bacause it can't use corresponding ones from "android:" (msbp_view_title, msbp_view_summary, msbp_view_enabled and msbp_defaultValue)
+Use them to define look and desired behavior. Prefixes used to avoid attribute collisions with other libs.
 
 # Collaborators
 I'd really want to thank:
@@ -63,6 +94,6 @@ I'd really want to thank:
 * [NitroG42](https://github.com/NitroG42) for pointing out to attribute collisions.
 
 #Licence
-Lib is licenced under *MIT licence*, so you can do whatever you want with it.
+Lib is licenced under *Apache2 licence*, so you can do whatever you want with it.
 I'd highly recommend to push changes back to make it cooler :D
 
