@@ -12,7 +12,7 @@ As far as I checked, there are no cool implementations of SeekBarPreference. So 
 
 Add this to your module dependencies:
 ```groovy
-    compile 'com.pavelsikun:material-seekbar-preference:0.12.1+'
+    compile 'com.pavelsikun:material-seekbar-preference:2.0.0+'
 ````
 
 Reference namespace on top of your layout file:
@@ -31,7 +31,8 @@ Now you can use this view in your preferences layout, just like any other normal
         sample:msbp_minValue="100"
         sample:msbp_maxValue="10000"
         sample:msbp_interval="200"
-        sample:msbp_measurementUnit="%"/>
+        sample:msbp_measurementUnit="%"
+        sample:msbp_dialogStyle=""/>
 ````
 Or use MaterialSeekBarView if you prefer to use views instead of preferences:
 ```xml

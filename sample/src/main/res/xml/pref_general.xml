@@ -9,7 +9,7 @@
         sample:msbp_minValue="0"
         sample:msbp_maxValue="1000"
         sample:msbp_interval="20"
-        sample:msbp_measurementUnit="bananas" />
+        sample:msbp_measurementUnit="bananas"/>
 
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:title="SeekbarPreference 1"
