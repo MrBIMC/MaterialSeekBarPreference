@@ -84,8 +84,12 @@ Either of way, View/Preference provides next methods to modify and manage it fro
 ```
 
 As you can see, lib provides 4 universal custom attributes(msbp_minValue, msbp_maxValue, msbp_interval and msbp_measurementUnit).
+
 There are also 4 additional attributes for view bacause it can't use corresponding ones from "android:" (msbp_view_title, msbp_view_summary, msbp_view_enabled and msbp_defaultValue)
-Use them to define look and desired behavior. Prefixes used to avoid attribute collisions with other libs.
+
+Use them to define look and desired behavior.
+
+Prefixes used to avoid attribute collisions with other libs.
 
 # Collaborators
 I'd really want to thank:
