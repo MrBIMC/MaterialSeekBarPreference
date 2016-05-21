@@ -4,9 +4,9 @@
 
 As far as I checked, there are no cool implementations of SeekBarPreference. So I decided to make one.
 
-<img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_1.jpg" width="250">
-<img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_2.jpg" width="250">
-<img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_3.jpg" width="250">
+<img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_1.jpg" width="255">
+<img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_2.jpg" width="255">
+<img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_3.jpg" width="255">
 
 #Usage
 
