@@ -36,7 +36,7 @@ Now you can use this view in your preferences layout, just like any other normal
 ````
 Or use MaterialSeekBarView if you prefer to use views instead of preferences:
 ```xml
-    <com.pavelsikun.seekbarpreference.MaterialSeekBarView
+    <com.pavelsikun.seekbarpreference.SeekBarPreferenceView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
