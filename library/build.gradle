@@ -10,6 +10,10 @@ android {
         versionCode 10
         versionName "2.0.0"
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
