@@ -2,39 +2,43 @@
                   xmlns:sample="http://schemas.android.com/apk/res-auto">
 
     <com.pavelsikun.seekbarpreference.SeekBarPreference
-        android:defaultValue="600"
-        android:key="seekbar1"
+        android:key="pr1"
         android:title="SeekbarPreference 1"
+        android:defaultValue="600"
+
+        sample:msbp_minValue="0"
         sample:msbp_maxValue="1000"
-        sample:msbp_measurementUnit="ms"
-        sample:msbp_minValue="0"/>
+        sample:msbp_interval="20"
+        sample:msbp_measurementUnit="bananas" />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:title="SeekbarPreference 1"
+        android:key="pr3"
+        android:defaultValue="0"
+
+        sample:msbp_minValue="-1000"
+        sample:msbp_maxValue="1000"
+        sample:msbp_measurementUnit="tomatoes" />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:key="pr4"
+        android:title="SeekbarPreference 1"
+        android:defaultValue="888"
+
+        sample:msbp_maxValue="8888"
+        sample:msbp_minValue="-8888"
+        sample:msbp_interval="16"
+        sample:msbp_measurementUnit="apples"/>
 
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:defaultValue="5000"
-        android:enabled="false"
         android:key="seekbar2"
         android:summary="This one is disabled!"
+        android:enabled="false"
         android:title="SeekbarPreference 2"
+
         sample:msbp_interval="200"
         sample:msbp_maxValue="0"
-        sample:msbp_measurementUnit="points"
+        sample:msbp_measurementUnit="mangoes"
         sample:msbp_minValue="10000"/>
-
-    <com.pavelsikun.seekbarpreference.SeekBarPreference
-        android:key="seekbar3"
-        android:summary="You can define interval for seekbar"
-        android:title="SeekbarPreference 3"
-        sample:msbp_interval="200"
-        sample:msbp_maxValue="10000"
-        sample:msbp_measurementUnit="lemons"
-        sample:msbp_minValue="100"/>
-
-    <com.pavelsikun.seekbarpreference.SeekBarPreference
-        android:key="seekbar4"
-        android:summary="Press on number to input value using keyboard"
-        android:title="SeekbarPreference 4"
-        sample:msbp_maxValue="-500"
-        sample:msbp_measurementUnit="$"
-        sample:msbp_minValue="-1000"/>
-
 </PreferenceScreen>

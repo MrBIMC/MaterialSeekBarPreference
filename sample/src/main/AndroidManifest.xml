@@ -8,18 +8,16 @@
         android:label="Sample"
         android:theme="@style/Theme.Application">
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/Theme.Application.NoActionBar" >
+            android:name=".ExamplePreferenceActivity"
+            android:label="@string/title_activity_main"/>
+        <activity
+            android:name=".ExampleViewActivity"
+            android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="Settings"
-            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>
