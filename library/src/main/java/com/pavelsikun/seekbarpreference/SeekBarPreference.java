@@ -24,6 +24,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     private static final int DEFAULT_MIN_VALUE = 0;
     private static final int DEFAULT_MAX_VALUE = 100;
     private static final int DEFAULT_INTERVAL = 1;
+    private static final boolean DEFAULT_DIALOG_ENABLED = true;
 
     private static final int DEFAULT_DIALOG_STYLE = R.style.MSB_Dialog_Default;
 
@@ -32,13 +33,14 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     private int interval;
     private int currentValue;
     private String measurementUnit;
+    private boolean dialogEnabled;
 
     private int dialogStyle;
 
     private TextView valueView;
     private SeekBar seekBarView;
     private TextView measurementView;
-
+    private LinearLayout valueHolderView;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public SeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -72,6 +74,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
             minValue = DEFAULT_MIN_VALUE;
             maxValue = DEFAULT_MAX_VALUE;
             interval = DEFAULT_INTERVAL;
+            dialogEnabled = DEFAULT_DIALOG_ENABLED;
         }
         else {
             TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.SeekBarPreference);
@@ -79,6 +82,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
                 minValue = a.getInt(R.styleable.SeekBarPreference_msbp_minValue, DEFAULT_MIN_VALUE);
                 maxValue = a.getInt(R.styleable.SeekBarPreference_msbp_maxValue, DEFAULT_MAX_VALUE);
                 interval = a.getInt(R.styleable.SeekBarPreference_msbp_interval, DEFAULT_INTERVAL);
+                dialogEnabled = a.getBoolean(R.styleable.SeekBarPreference_msbp_dialogEnabled, DEFAULT_DIALOG_ENABLED);
 
                 measurementUnit = a.getString(R.styleable.SeekBarPreference_msbp_measurementUnit);
                 currentValue = attrs.getAttributeIntValue("http://schemas.android.com/apk/res/android", "defaultValue", DEFAULT_CURRENT_VALUE);
@@ -110,8 +114,8 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
         setCurrentValue(currentValue);
         valueView.setText(String.valueOf(currentValue));
 
-        LinearLayout valueHolderView = (LinearLayout) view.findViewById(R.id.value_holder);
-        valueHolderView.setOnClickListener(this);
+        valueHolderView = (LinearLayout) view.findViewById(R.id.value_holder);
+        valueHolderView.setOnClickListener(dialogEnabled ? this : null);
 
         if (!view.isEnabled()) {
             Log.d(TAG, "view is disabled!");
@@ -240,6 +244,16 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
         if(measurementView != null) {
             measurementView.setText(measurementUnit);
         }
+    }
+
+    public boolean isDialogEnabled() {
+        return dialogEnabled;
+    }
+
+    public void setDialogEnabled(boolean dialogEnabled) {
+        this.dialogEnabled = dialogEnabled;
+
+        valueHolderView.setOnClickListener(dialogEnabled ? this : null);
     }
 
     public void setDialogStyle(int dialogStyle) {

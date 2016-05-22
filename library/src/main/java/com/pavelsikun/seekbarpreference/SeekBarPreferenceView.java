@@ -24,6 +24,7 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
     private static final int DEFAULT_MIN_VALUE = 0;
     private static final int DEFAULT_MAX_VALUE = 100;
     private static final int DEFAULT_INTERVAL = 1;
+    private static final boolean DEFAULT_DIALOG_ENABLED = true;
     private static final boolean DEFAULT_IS_ENABLED = true;
 
     private static final int DEFAULT_DIALOG_STYLE = R.style.MSB_Dialog_Default;
@@ -33,12 +34,14 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
     private int interval;
     private int currentValue;
     private String measurementUnit;
+    private boolean dialogEnabled;
 
     private int dialogStyle;
 
     private TextView valueView;
     private SeekBar seekBarView;
     private TextView measurementView;
+    private LinearLayout valueHolderView;
     private View view;
 
     private TextView titleView, summaryView;
@@ -82,6 +85,7 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
             minValue = DEFAULT_MIN_VALUE;
             maxValue = DEFAULT_MAX_VALUE;
             interval = DEFAULT_INTERVAL;
+            dialogEnabled = DEFAULT_DIALOG_ENABLED;
             isEnabled = DEFAULT_IS_ENABLED;
         }
         else {
@@ -90,6 +94,7 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
                 minValue = a.getInt(R.styleable.SeekBarPreference_msbp_minValue, DEFAULT_MIN_VALUE);
                 maxValue = a.getInt(R.styleable.SeekBarPreference_msbp_maxValue, DEFAULT_MAX_VALUE);
                 interval = a.getInt(R.styleable.SeekBarPreference_msbp_interval, DEFAULT_INTERVAL);
+                dialogEnabled = a.getBoolean(R.styleable.SeekBarPreference_msbp_view_dialogEnabled, DEFAULT_DIALOG_ENABLED);
 
                 measurementUnit = a.getString(R.styleable.SeekBarPreference_msbp_measurementUnit);
 
@@ -130,8 +135,8 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
         titleView.setText(title);
         summaryView.setText(summary);
 
-        LinearLayout valueHolderView = (LinearLayout) view.findViewById(R.id.value_holder);
-        valueHolderView.setOnClickListener(this);
+        valueHolderView = (LinearLayout) view.findViewById(R.id.value_holder);
+        valueHolderView.setOnClickListener(dialogEnabled ? this : null);
 
         if (!isEnabled) {
             Log.d(TAG, "view is disabled!");
@@ -291,6 +296,16 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
 
     public void setOnValueSelectedListener(OnValueSelectedListener onValueSelectedListener) {
         this.onValueSelectedListener = onValueSelectedListener;
+    }
+
+    public boolean isDialogEnabled() {
+        return dialogEnabled;
+    }
+
+    public void setDialogEnabled(boolean dialogEnabled) {
+        this.dialogEnabled = dialogEnabled;
+
+        valueHolderView.setOnClickListener(dialogEnabled ? this : null);
     }
 
     public void setDialogStyle(int dialogStyle) {
