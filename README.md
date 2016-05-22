@@ -4,7 +4,7 @@
 
 As far as I checked, there are no cool implementations of SeekBarPreference. So I decided to make one. Works on API-v7+
 
-<img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_1.jpg" width="255">
+<img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_4.jpg" width="255">
 <img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_2.jpg" width="255">
 <img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_3.jpg" width="255">
 
@@ -12,7 +12,7 @@ As far as I checked, there are no cool implementations of SeekBarPreference. So 
 
 Add this to your module dependencies:
 ```groovy
-    compile 'com.pavelsikun:material-seekbar-preference:2.0.0+'
+    compile 'com.pavelsikun:material-seekbar-preference:2.1.0+'
 ````
 
 Reference namespace on top of your layout file:
