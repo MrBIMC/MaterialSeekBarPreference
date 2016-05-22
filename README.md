@@ -62,7 +62,7 @@ Or use MaterialSeekBarView if you prefer to use views instead of preferences(wor
         app:msbp_minValue="-2000"
 
         app:msbp_view_title="SeekBarPreferenceView Example"
-        app:msbp_view_summary="As you can see, view uses a bit different xml-attributes for some things"/>
+        app:msbp_view_summary="As you can see, view uses a bit different xml-attributes for some things"
         app:msbp_view_enabled="false"
         app:msbp_view_defaultValue="0" />
 ```
