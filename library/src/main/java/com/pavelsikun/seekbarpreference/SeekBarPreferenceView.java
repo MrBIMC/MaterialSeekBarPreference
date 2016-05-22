@@ -42,6 +42,7 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
     private SeekBar seekBarView;
     private TextView measurementView;
     private LinearLayout valueHolderView;
+    private FrameLayout bottomLineView;
     private View view;
 
     private TextView titleView, summaryView;
@@ -135,8 +136,10 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
         titleView.setText(title);
         summaryView.setText(summary);
 
+        bottomLineView = (FrameLayout) view.findViewById(R.id.bottom_line);
         valueHolderView = (LinearLayout) view.findViewById(R.id.value_holder);
-        valueHolderView.setOnClickListener(dialogEnabled ? this : null);
+
+        setDialogEnabled(dialogEnabled);
 
         if (!isEnabled) {
             Log.d(TAG, "view is disabled!");
@@ -306,6 +309,8 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
         this.dialogEnabled = dialogEnabled;
 
         valueHolderView.setOnClickListener(dialogEnabled ? this : null);
+        valueHolderView.setClickable(dialogEnabled);
+        bottomLineView.setVisibility(dialogEnabled ? View.VISIBLE : View.INVISIBLE);
     }
 
     public void setDialogStyle(int dialogStyle) {

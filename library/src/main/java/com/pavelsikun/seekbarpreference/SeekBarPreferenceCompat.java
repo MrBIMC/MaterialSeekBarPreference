@@ -9,6 +9,7 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class SeekBarPreferenceCompat extends Preference implements SeekBar.OnSee
     private SeekBar seekBarView;
     private TextView measurementView;
     private LinearLayout valueHolderView;
+    private FrameLayout bottomLineView;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public SeekBarPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
@@ -123,8 +125,10 @@ public class SeekBarPreferenceCompat extends Preference implements SeekBar.OnSee
         setCurrentValue(currentValue);
         valueView.setText(String.valueOf(currentValue));
 
+        bottomLineView = (FrameLayout) view.findViewById(R.id.bottom_line);
         valueHolderView = (LinearLayout) view.findViewById(R.id.value_holder);
-        valueHolderView.setOnClickListener(dialogEnabled ? this : null);
+
+        setDialogEnabled(dialogEnabled);
 
         if (!isEnabled()) {
             Log.d(TAG, "view is disabled!");
@@ -264,6 +268,8 @@ public class SeekBarPreferenceCompat extends Preference implements SeekBar.OnSee
         this.dialogEnabled = dialogEnabled;
 
         valueHolderView.setOnClickListener(dialogEnabled ? this : null);
+        valueHolderView.setClickable(dialogEnabled);
+        bottomLineView.setVisibility(dialogEnabled ? View.VISIBLE : View.INVISIBLE);
     }
 
     public void setDialogStyle(int dialogStyle) {
