@@ -2,7 +2,7 @@
 
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-MaterialSeekBarPreference-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/1756)
 
-As far as I checked, there are no cool implementations of SeekBarPreference. So I decided to make one.
+As far as I checked, there are no cool implementations of SeekBarPreference. So I decided to make one. Works on API-v7+
 
 <img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_1.jpg" width="255">
 <img src="https://raw.githubusercontent.com/MrBIMC/MaterialSeekBarPreference/master/ART/screen_2.jpg" width="255">
@@ -20,7 +20,7 @@ Reference namespace on top of your layout file:
     xmlns:sample="http://schemas.android.com/apk/res-auto">
 ````
 
-Now you can use this view in your preferences layout, just like any other normal preference.
+Now you can use this view in your preferences layout, just like any other normal preference(API-v11+).
 ```xml
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:key="your_pref_key"
@@ -34,7 +34,23 @@ Now you can use this view in your preferences layout, just like any other normal
         sample:msbp_interval="200"
         sample:msbp_measurementUnit="%" />
 ````
-Or use MaterialSeekBarView if you prefer to use views instead of preferences:
+
+If you have to support API-v7+, this lib provides also SeekBarPreferenceCompat that works with preference-v7.
+```xml
+    <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
+        android:key="your_pref_key"
+        android:title="SeekbarPreference 2"
+        android:summary="Some summary"
+        android:enabled="false"
+        android:defaultValue="5000"
+
+        sample:msbp_minValue="100"
+        sample:msbp_maxValue="10000"
+        sample:msbp_interval="200"
+        sample:msbp_measurementUnit="%" />
+````
+
+Or use MaterialSeekBarView if you prefer to use views instead of preferences(works on v7+):
 ```xml
     <com.pavelsikun.seekbarpreference.SeekBarPreferenceView
         android:layout_width="match_parent"

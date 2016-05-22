@@ -1,26 +1,24 @@
 package com.pavelsikun.seekbarpreference.sample;
 
-import android.annotation.TargetApi;
-import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceFragment;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import com.pavelsikun.seekbarpreference.SeekBarPreference;
+
+import com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat;
 
 /**
  * Created by mrbimc on 02.04.16.
  */
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-public class ExamplePreferenceActivity extends AppCompatActivity {
+public class ExamplePreferenceCompatActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getFragmentManager()
+        getSupportFragmentManager()
                 .beginTransaction()
                 .replace(android.R.id.content, new PreferencesScreen())
                 .commit();
@@ -39,18 +37,22 @@ public class ExamplePreferenceActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static class PreferencesScreen extends PreferenceFragment {
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_general);
-        }
+    public static class PreferencesScreen extends PreferenceFragmentCompat {
+
+        //I also recommend you to use some 3rd-party lib to style PreferenceFragmentCompat
+        //because by default v7 prefs don't respect device theme and look ugly,
+        //even on v21+(thought afaik since v23.4.0 look on lollipop+ was fixed)
+
+        //theoretically useful links:
+        // * http://stackoverflow.com/questions/32070670/preferencefragmentcompat-requires-preferencetheme-to-be-set
+        // * https://github.com/consp1racy/android-support-preference
 
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            SeekBarPreference pref = new SeekBarPreference(getActivity());
-            pref.setTitle("Dynamic Preference");
+            SeekBarPreferenceCompat pref = new SeekBarPreferenceCompat(getActivity());
+            pref.setTitle("Dynamic PreferenceCompat Example");
             pref.setSummary("This one was added from Java");
             pref.setMinValue(222);
             pref.setMaxValue(999);
@@ -60,6 +62,9 @@ public class ExamplePreferenceActivity extends AppCompatActivity {
             getPreferenceScreen().addPreference(pref);
         }
 
-
+        @Override
+        public void onCreatePreferences(Bundle bundle, String s) {
+            addPreferencesFromResource(R.xml.pref_general_compat); // load your SeekBarPreferenceCompat prefs from xml
+        }
     }
 }

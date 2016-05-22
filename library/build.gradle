@@ -5,10 +5,10 @@ android {
     buildToolsVersion "23.0.3"
 
     defaultConfig {
-        minSdkVersion 11
+        minSdkVersion 7
         targetSdkVersion 23
-        versionCode 10
-        versionName "2.0.0"
+        versionCode 11
+        versionName "2.1.0"
     }
 
     lintOptions {
@@ -18,12 +18,13 @@ android {
 
 dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
+    compile 'com.android.support:preference-v7:23.4.0'
 }
 
 ext {
     PUBLISH_GROUP_ID = 'com.pavelsikun'
     PUBLISH_ARTIFACT_ID = 'material-seekbar-preference'
-    PUBLISH_VERSION = '2.0.0'
+    PUBLISH_VERSION = '2.1.0'
 }
 
 apply from: 'https://raw.githubusercontent.com/blundell/release-android-library/master/android-release-aar.gradle'

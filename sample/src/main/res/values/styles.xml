@@ -2,7 +2,6 @@
 
     <style name="Theme.Application" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
         <item name="toolbarStyle">@style/Widget.Toolbar</item>
 
         <item name="colorPrimary">@color/primary</item>
@@ -17,7 +16,13 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="Theme.Application.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="Theme.Application.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="Theme.Application.Settings" parent="Theme.Application">
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
+    </style>
 
 </resources>

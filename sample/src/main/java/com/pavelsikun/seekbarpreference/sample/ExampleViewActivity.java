@@ -1,16 +1,18 @@
 package com.pavelsikun.seekbarpreference.sample;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SwitchCompat;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.pavelsikun.seekbarpreference.OnValueSelectedListener;
@@ -22,7 +24,9 @@ import com.pavelsikun.seekbarpreference.SeekBarPreferenceView;
 
 public class ExampleViewActivity extends AppCompatActivity {
 
-    LinearLayout root;
+    private LinearLayout root;
+
+    boolean isCompatPrefs = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +36,20 @@ public class ExampleViewActivity extends AppCompatActivity {
         findViewById(R.id.uselessTempButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ExampleViewActivity.this, ExamplePreferenceActivity.class));
+                if(isCompatPrefs) {
+                    startActivity(new Intent(ExampleViewActivity.this, ExamplePreferenceCompatActivity.class));
+                }
+                else {
+                    if(Build.VERSION.SDK_INT < 11) {
+                        Toast.makeText(
+                                ExampleViewActivity.this,
+                                "API-11+ required for this. Switch to preference-v7 mode instead",
+                                Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        startActivity(new Intent(ExampleViewActivity.this, ExamplePreferenceActivity.class));
+                    }
+                }
             }
         });
 
@@ -42,6 +59,24 @@ public class ExampleViewActivity extends AppCompatActivity {
         }
 
         root = (LinearLayout) findViewById(R.id.root);
+
+        final SwitchCompat s = (SwitchCompat) findViewById(R.id.switchWidget);
+        RelativeLayout text = (RelativeLayout) findViewById(R.id.switchHolder);
+
+        text.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                s.toggle();
+            }
+        });
+
+        s.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isCompatPrefs = isChecked;
+                Log.d(getClass().getSimpleName(), "switch state changed " + isChecked);
+            }
+        });
     }
 
     @Override

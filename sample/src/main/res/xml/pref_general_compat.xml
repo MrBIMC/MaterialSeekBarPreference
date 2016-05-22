@@ -1,0 +1,44 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:sample="http://schemas.android.com/apk/res-auto">
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
+        android:key="pr1"
+        android:title="SeekbarPreference 1"
+        android:defaultValue="600"
+
+        sample:msbp_minValue="0"
+        sample:msbp_maxValue="1000"
+        sample:msbp_interval="20"
+        sample:msbp_measurementUnit="bananas"/>
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
+        android:title="SeekbarPreference 1"
+        android:key="pr3"
+        android:defaultValue="0"
+
+        sample:msbp_minValue="-1000"
+        sample:msbp_maxValue="1000"
+        sample:msbp_measurementUnit="tomatoes" />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
+        android:key="pr4"
+        android:title="SeekbarPreference 1"
+        android:defaultValue="888"
+
+        sample:msbp_maxValue="8888"
+        sample:msbp_minValue="-8888"
+        sample:msbp_interval="16"
+        sample:msbp_measurementUnit="apples"/>
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
+        android:defaultValue="5000"
+        android:key="seekbar2"
+        android:summary="This one is disabled!"
+        android:enabled="false"
+        android:title="SeekbarPreference 2"
+
+        sample:msbp_interval="200"
+        sample:msbp_maxValue="0"
+        sample:msbp_measurementUnit="mangoes"
+        sample:msbp_minValue="10000"/>
+</PreferenceScreen>

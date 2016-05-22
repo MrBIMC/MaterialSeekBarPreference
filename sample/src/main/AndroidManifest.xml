@@ -11,6 +11,10 @@
             android:name=".ExamplePreferenceActivity"
             android:label="@string/title_activity_main"/>
         <activity
+            android:name=".ExamplePreferenceCompatActivity"
+            android:theme="@style/Theme.Application.Settings"
+            android:label="@string/title_activity_main"/>
+        <activity
             android:name=".ExampleViewActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
