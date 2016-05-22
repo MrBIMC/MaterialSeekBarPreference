@@ -99,12 +99,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:msbp_interval="200"
+        app:msbp_maxValue="0"
+        app:msbp_minValue="-2000"
+        app:msbp_measurementUnit="bananas"
+
+        app:msbp_view_defaultValue="-444"
+        app:msbp_view_title="Test View 3"
+        app:msbp_view_dialogEnabled="false"
+        app:msbp_view_summary="This one won\'t show dialog"/>
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreferenceView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:msbp_interval="200"
         app:msbp_maxValue="3000"
         app:msbp_minValue="-2000"
         app:msbp_measurementUnit="oranges"
 
         app:msbp_view_defaultValue="444"
-        app:msbp_view_title="Test View 2"
+        app:msbp_view_title="Test View 4"
         app:msbp_view_summary="This one is Disabled"
         app:msbp_view_enabled="false"/>
 
