@@ -38,9 +38,9 @@
 
         sample:msbp_dialogEnabled="false"
         sample:msbp_interval="200"
-        sample:msbp_maxValue="0"
+        sample:msbp_maxValue="10000"
         sample:msbp_measurementUnit="mangoes"
-        sample:msbp_minValue="10000" />
+        sample:msbp_minValue="0" />
 
     <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
         android:defaultValue="5000"
