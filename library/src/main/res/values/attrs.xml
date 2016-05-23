@@ -10,7 +10,6 @@
         <attr name="msbp_view_title" format="reference|string"/>
         <attr name="msbp_view_summary" format="reference|string"/>
         <attr name="msbp_view_defaultValue" format="reference|integer"/>
-        <attr name="msbp_view_dialogEnabled" format="reference|boolean"/>
         <attr name="msbp_view_enabled" format="reference|boolean"/>
 
         <!--not implemented yet-->

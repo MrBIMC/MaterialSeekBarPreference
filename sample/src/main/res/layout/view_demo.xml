@@ -99,10 +99,10 @@
             app:msbp_maxValue="0"
             app:msbp_minValue="-2000"
             app:msbp_measurementUnit="bananas"
+            app:msbp_dialogEnabled="false"
 
             app:msbp_view_defaultValue="-444"
             app:msbp_view_title="Test View 3"
-            app:msbp_view_dialogEnabled="false"
             app:msbp_view_summary="This one won\'t show dialog"/>
 
         <com.pavelsikun.seekbarpreference.SeekBarPreferenceView

@@ -95,7 +95,7 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
                 minValue = a.getInt(R.styleable.SeekBarPreference_msbp_minValue, DEFAULT_MIN_VALUE);
                 maxValue = a.getInt(R.styleable.SeekBarPreference_msbp_maxValue, DEFAULT_MAX_VALUE);
                 interval = a.getInt(R.styleable.SeekBarPreference_msbp_interval, DEFAULT_INTERVAL);
-                dialogEnabled = a.getBoolean(R.styleable.SeekBarPreference_msbp_view_dialogEnabled, DEFAULT_DIALOG_ENABLED);
+                dialogEnabled = a.getBoolean(R.styleable.SeekBarPreference_msbp_dialogEnabled, DEFAULT_DIALOG_ENABLED);
 
                 measurementUnit = a.getString(R.styleable.SeekBarPreference_msbp_measurementUnit);
 
@@ -296,7 +296,6 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
         }
     }
 
-
     public void setOnValueSelectedListener(OnValueSelectedListener onValueSelectedListener) {
         this.onValueSelectedListener = onValueSelectedListener;
     }
@@ -308,9 +307,11 @@ public class SeekBarPreferenceView extends FrameLayout implements SeekBar.OnSeek
     public void setDialogEnabled(boolean dialogEnabled) {
         this.dialogEnabled = dialogEnabled;
 
-        valueHolderView.setOnClickListener(dialogEnabled ? this : null);
-        valueHolderView.setClickable(dialogEnabled);
-        bottomLineView.setVisibility(dialogEnabled ? View.VISIBLE : View.INVISIBLE);
+        if(valueHolderView != null && bottomLineView != null) {
+            valueHolderView.setOnClickListener(dialogEnabled ? this : null);
+            valueHolderView.setClickable(dialogEnabled);
+            bottomLineView.setVisibility(dialogEnabled ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 
     public void setDialogStyle(int dialogStyle) {

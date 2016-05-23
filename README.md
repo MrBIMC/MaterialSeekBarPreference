@@ -12,7 +12,7 @@ As far as I checked, there are no cool implementations of SeekBarPreference. So 
 
 Add this to your module dependencies:
 ```groovy
-    compile 'com.pavelsikun:material-seekbar-preference:2.1.0+'
+    compile 'com.pavelsikun:material-seekbar-preference:2.2.0+'
 ````
 
 Reference namespace on top of your layout file:
@@ -32,7 +32,8 @@ Now you can use this view in your preferences layout, just like any other normal
         sample:msbp_minValue="100"
         sample:msbp_maxValue="10000"
         sample:msbp_interval="200"
-        sample:msbp_measurementUnit="%" />
+        sample:msbp_measurementUnit="%"
+        sample:msbp_dialogEnabled="false"/>
 ````
 
 If you have to support API-v7+, this lib provides also SeekBarPreferenceCompat that works with preference-v7.
@@ -47,7 +48,8 @@ If you have to support API-v7+, this lib provides also SeekBarPreferenceCompat t
         sample:msbp_minValue="100"
         sample:msbp_maxValue="10000"
         sample:msbp_interval="200"
-        sample:msbp_measurementUnit="%" />
+        sample:msbp_measurementUnit="%"
+        sample:msbp_dialogEnabled="false"/>
 ````
 
 Or use MaterialSeekBarView if you prefer to use views instead of preferences(works on v7+):
@@ -60,6 +62,7 @@ Or use MaterialSeekBarView if you prefer to use views instead of preferences(wor
         app:msbp_maxValue="0"
         app:msbp_measurementUnit="bananas"
         app:msbp_minValue="-2000"
+        sample:msbp_dialogEnabled="false"
 
         app:msbp_view_title="SeekBarPreferenceView Example"
         app:msbp_view_summary="As you can see, view uses a bit different xml-attributes for some things"
@@ -93,6 +96,8 @@ Either of way, View/Preference provides next methods to modify and manage it fro
     public String getMeasurementUnit();
     public void setMeasurementUnit(String measurementUnit);
 
+    public void setDialogEnabled(boolean dialogEnabled);
+
     public void setDialogStyle(int dialogStyle);
 
     // AND for view-only(at least for now), there's a way to get a callback whenever value changes:
@@ -113,6 +118,7 @@ I'd really want to thank:
 * [krage](https://github.com/krage) for adding support for referenced resources.
 * [NitroG42](https://github.com/NitroG42) for pointing out to attribute collisions.
 * [Dmytro Karataiev](https://github.com/dmytroKarataiev) for a fix for defaultValue.
+* [Mehmet Akif Tütüncü](https://github.com/mehmetakiftutuncu) for adding support to disable customInputDialog.
 
 #Licence
 Lib is licenced under *Apache2 licence*, so you can do whatever you want with it.

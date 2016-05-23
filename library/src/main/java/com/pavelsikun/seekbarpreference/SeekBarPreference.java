@@ -257,9 +257,11 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
     public void setDialogEnabled(boolean dialogEnabled) {
         this.dialogEnabled = dialogEnabled;
 
-        valueHolderView.setOnClickListener(dialogEnabled ? this : null);
-        valueHolderView.setClickable(dialogEnabled);
-        bottomLineView.setVisibility(dialogEnabled ? View.VISIBLE : View.INVISIBLE);
+        if(valueHolderView != null && bottomLineView != null) {
+            valueHolderView.setOnClickListener(dialogEnabled ? this : null);
+            valueHolderView.setClickable(dialogEnabled);
+            bottomLineView.setVisibility(dialogEnabled ? View.VISIBLE : View.INVISIBLE);
+        }
     }
 
     public void setDialogStyle(int dialogStyle) {
