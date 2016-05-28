@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.pavelsikun.seekbarpreference.OnValueSelectedListener;
+import com.pavelsikun.seekbarpreference.PersistValueListener;
 import com.pavelsikun.seekbarpreference.SeekBarPreferenceView;
 
 /**
@@ -91,10 +91,11 @@ public class ExampleViewActivity extends AppCompatActivity {
         view.setInterval(10);
         view.setCurrentValue(0);
         view.setMeasurementUnit("points");
-        view.setOnValueSelectedListener(new OnValueSelectedListener() {
+        view.setOnValueSelectedListener(new PersistValueListener() {
             @Override
-            public void onValueSelected(int value) {
+            public boolean persistInt(int value) {
                 Toast.makeText(ExampleViewActivity.this, "callback from view: " + value, Toast.LENGTH_SHORT).show();
+                return true;
             }
         });
 

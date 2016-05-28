@@ -64,6 +64,7 @@
 
         <TextView
             android:text="View demo:"
+            android:paddingLeft="6dp"
             android:textColor="@color/accent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

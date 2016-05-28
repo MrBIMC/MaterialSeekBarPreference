@@ -24,7 +24,7 @@ class CustomValueDialog {
     private EditText customValueView;
 
     private int minValue, maxValue, currentValue;
-    private OnValueSelectedListener onValueSelectedListener;
+    private PersistValueListener persistValueListener;
 
     CustomValueDialog(Context context, int theme, int minValue, int maxValue, int currentValue) {
         this.minValue = minValue;
@@ -77,8 +77,8 @@ class CustomValueDialog {
         return color;
     }
 
-    CustomValueDialog setOnValueSelectedListener(OnValueSelectedListener listener) {
-        onValueSelectedListener = listener;
+    CustomValueDialog setPersistValueListener(PersistValueListener listener) {
+        persistValueListener = listener;
         return this;
     }
 
@@ -108,8 +108,8 @@ class CustomValueDialog {
             return;
         }
 
-        if(onValueSelectedListener != null) {
-            onValueSelectedListener.onValueSelected(value);
+        if(persistValueListener != null) {
+            persistValueListener.persistInt(value);
             dialog.dismiss();
         }
     }

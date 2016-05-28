@@ -12,7 +12,7 @@ As far as I checked, there are no cool implementations of SeekBarPreference. So 
 
 Add this to your module dependencies:
 ```groovy
-    compile 'com.pavelsikun:material-seekbar-preference:2.2.0+'
+    compile 'com.pavelsikun:material-seekbar-preference:2.3.0+'
 ````
 
 Reference namespace on top of your layout file:
@@ -101,7 +101,7 @@ Either of way, View/Preference provides next methods to modify and manage it fro
     public void setDialogStyle(int dialogStyle);
 
     // AND for view-only(at least for now), there's a way to get a callback whenever value changes:
-    public void setOnValueSelectedListener(OnValueSelectedListener onValueSelectedListener);
+    public void setOnValueSelectedListener(PersistValueListener onValuePersisted);
 ```
 
 As you can see, lib provides 4 universal custom attributes(msbp_minValue, msbp_maxValue, msbp_interval and msbp_measurementUnit).
