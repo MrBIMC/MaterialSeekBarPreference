@@ -12,7 +12,7 @@ import android.view.View;
  * Created by Pavel Sikun on 22.05.16.
  */
 
-public class SeekBarPreferenceCompat extends Preference implements View.OnClickListener, PreferenceControllerDelegate.ViewStateListener, PersistValueListener {
+public class SeekBarPreferenceCompat extends Preference implements View.OnClickListener, PreferenceControllerDelegate.ViewStateListener, PersistValueListener, ChangeValueListener {
 
     private PreferenceControllerDelegate controllerDelegate;
 
@@ -36,12 +36,14 @@ public class SeekBarPreferenceCompat extends Preference implements View.OnClickL
         super(context);
         init(null);
     }
+
     private void init(AttributeSet attrs) {
         setLayoutResource(R.layout.seekbar_view_layout);
         controllerDelegate = new PreferenceControllerDelegate(getContext(), false);
 
         controllerDelegate.setViewStateListener(this);
         controllerDelegate.setPersistValueListener(this);
+        controllerDelegate.setChangeValueListener(this);
 
         controllerDelegate.loadValuesFromXml(attrs);
     }
@@ -61,6 +63,11 @@ public class SeekBarPreferenceCompat extends Preference implements View.OnClickL
     @Override
     public boolean persistInt(int value) {
         return super.persistInt(value);
+    }
+
+    @Override
+    public boolean onChange(int value) {
+        return callChangeListener(value);
     }
 
     @Override
