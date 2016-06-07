@@ -11,7 +11,7 @@ import android.view.View;
  * Created by Pavel Sikun on 21.05.16.
  */
 
-public class SeekBarPreference extends Preference implements View.OnClickListener, PreferenceControllerDelegate.ViewStateListener, PersistValueListener {
+public class SeekBarPreference extends Preference implements View.OnClickListener, PreferenceControllerDelegate.ViewStateListener, PersistValueListener, ChangeValueListener {
 
     private PreferenceControllerDelegate controllerDelegate;
 
@@ -42,6 +42,7 @@ public class SeekBarPreference extends Preference implements View.OnClickListene
 
         controllerDelegate.setViewStateListener(this);
         controllerDelegate.setPersistValueListener(this);
+        controllerDelegate.setChangeValueListener(this);
 
         controllerDelegate.loadValuesFromXml(attrs);
     }
@@ -61,6 +62,11 @@ public class SeekBarPreference extends Preference implements View.OnClickListene
     @Override
     public boolean persistInt(int value) {
         return super.persistInt(value);
+    }
+
+    @Override
+    public boolean onChange(int value) {
+        return callChangeListener(value);
     }
 
     @Override

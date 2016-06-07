@@ -53,6 +53,7 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
     private Context context;
     private ViewStateListener viewStateListener;
     private PersistValueListener persistValueListener;
+    private ChangeValueListener changeValueListener;
 
     interface ViewStateListener {
         boolean isEnabled();
@@ -70,6 +71,10 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
 
     void setViewStateListener(ViewStateListener viewStateListener) {
         this.viewStateListener = viewStateListener;
+    }
+
+    void setChangeValueListener(ChangeValueListener changeValueListener) {
+        this.changeValueListener = changeValueListener;
     }
 
     void loadValuesFromXml(AttributeSet attrs) {
@@ -159,6 +164,11 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
             newValue = minValue;
         }
 
+        if (changeValueListener != null) {
+            if (!changeValueListener.onChange(newValue)) {
+                return;
+            }
+        }
         currentValue = newValue;
         valueView.setText(String.valueOf(newValue));
     }
@@ -290,6 +300,11 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
         if(value < minValue) value = minValue;
         if(value > maxValue) value = maxValue;
 
+        if (changeValueListener != null) {
+            if (!changeValueListener.onChange(value)) {
+                return;
+            }
+        }
         currentValue = value;
 
         if(persistValueListener != null) {
