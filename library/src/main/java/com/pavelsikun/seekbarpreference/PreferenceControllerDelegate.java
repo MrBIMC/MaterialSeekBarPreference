@@ -154,17 +154,6 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         int newValue = minValue + (progress * interval);
 
-        if (interval != 1 && newValue % interval != 0) {
-            newValue = Math.round(((float) newValue) / interval) * interval;
-        }
-
-        if (newValue > maxValue) {
-            newValue = maxValue;
-        }
-        else if (newValue < minValue) {
-            newValue = minValue;
-        }
-
         if (changeValueListener != null) {
             if (!changeValueListener.onChange(newValue)) {
                 return;
