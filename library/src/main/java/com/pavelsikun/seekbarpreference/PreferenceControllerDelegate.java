@@ -146,7 +146,7 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
         valueHolderView = (LinearLayout) view.findViewById(R.id.value_holder);
 
         setDialogEnabled(dialogEnabled);
-        setEnabled(isEnabled());
+        setEnabled(isEnabled(), true);
     }
 
     @Override
@@ -230,11 +230,11 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
         else return isEnabled;
     }
 
-    void setEnabled(boolean enabled) {
+    void setEnabled(boolean enabled, boolean viewsOnly) {
         Log.d(TAG, "setEnabled = " + enabled);
         isEnabled = enabled;
 
-        if(viewStateListener != null) {
+        if(viewStateListener != null && !viewsOnly) {
             viewStateListener.setEnabled(enabled);
         }
 
@@ -254,6 +254,10 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
             }
         }
 
+    }
+
+    void setEnabled(boolean enabled) {
+        setEnabled(enabled, false);
     }
 
     int getMaxValue() {
