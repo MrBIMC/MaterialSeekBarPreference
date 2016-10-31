@@ -300,6 +300,8 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
             }
         }
         currentValue = value;
+        if(seekBarView != null)
+            seekBarView.setProgress(currentValue - minValue);
 
         if(persistValueListener != null) {
             persistValueListener.persistInt(value);
