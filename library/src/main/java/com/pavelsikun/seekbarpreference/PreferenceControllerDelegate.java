@@ -91,8 +91,9 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SeekBarPreference);
             try {
                 minValue = a.getInt(R.styleable.SeekBarPreference_msbp_minValue, DEFAULT_MIN_VALUE);
-                maxValue = a.getInt(R.styleable.SeekBarPreference_msbp_maxValue, DEFAULT_MAX_VALUE);
                 interval = a.getInt(R.styleable.SeekBarPreference_msbp_interval, DEFAULT_INTERVAL);
+                int saved_maxValue = a.getInt(R.styleable.SeekBarPreference_msbp_maxValue, DEFAULT_MAX_VALUE);
+                maxValue = (saved_maxValue - minValue) / interval;
                 dialogEnabled = a.getBoolean(R.styleable.SeekBarPreference_msbp_dialogEnabled, DEFAULT_DIALOG_ENABLED);
 
                 measurementUnit = a.getString(R.styleable.SeekBarPreference_msbp_measurementUnit);
@@ -151,18 +152,7 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        int newValue = progress + minValue;
-
-        if (interval != 1 && newValue % interval != 0) {
-            newValue = Math.round(((float) newValue) / interval) * interval;
-        }
-
-        if (newValue > maxValue) {
-            newValue = maxValue;
-        }
-        else if (newValue < minValue) {
-            newValue = minValue;
-        }
+        int newValue = minValue + (progress * interval);
 
         if (changeValueListener != null) {
             if (!changeValueListener.onChange(newValue)) {
