@@ -53,4 +53,23 @@
         sample:msbp_maxValue="0"
         sample:msbp_measurementUnit="mangoes"
         sample:msbp_minValue="10000" />
+
+    <SwitchPreferenceCompat
+        android:key="pr6_switch"
+        android:summary="Enable / disable the following seek bar"
+        android:title="Enabled"
+        android:defaultValue="false"
+        />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
+        android:defaultValue="500"
+        android:dependency="pr6_switch"
+        android:key="pr6"
+        android:summary="This one is disabled!"
+        android:title="SeekbarPreference 6"
+
+        sample:msbp_interval="200"
+        sample:msbp_maxValue="1000"
+        sample:msbp_measurementUnit="mangoes"
+        sample:msbp_minValue="0" />
 </PreferenceScreen>
