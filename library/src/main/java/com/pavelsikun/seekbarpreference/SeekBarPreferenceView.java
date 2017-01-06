@@ -40,12 +40,8 @@ public class SeekBarPreferenceView extends FrameLayout implements View.OnClickLi
     private void init(AttributeSet attrs) {
         controllerDelegate = new PreferenceControllerDelegate(getContext(), true);
         controllerDelegate.loadValuesFromXml(attrs);
-    }
 
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        View view = inflate(getContext(), R.layout.seekbar_view_layout, this);
+        final View view = inflate(getContext(), R.layout.seekbar_view_layout, this);
         controllerDelegate.onBind(view);
     }
 
