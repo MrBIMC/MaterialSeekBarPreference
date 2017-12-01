@@ -12,12 +12,14 @@
     <style name="Widget.Toolbar" parent="@style/Widget.AppCompat.Toolbar">
         <item name="android:background">@color/primary</item>
     </style>
+
     <style name="Theme.Application.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.Application.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="Theme.Application.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
@@ -25,4 +27,9 @@
         <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
 
+    <style name="MSB_Dialog_Default.Freaky">
+        <item name="msbp_dialogCancel">I don't know</item>
+        <item name="msbp_dialogOk">Answer"</item>
+        <item name="msbp_dialogTitle">How much bananas has the monkey thrown at you?</item>
+    </style>
 </resources>

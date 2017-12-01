@@ -2,4 +2,12 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_main">SeekBarPreference Lib Sample :D</string>
+    <plurals name="plural_bananas" >
+        <item quantity="zero">zero (%d)</item>
+        <item quantity="one">one (%d)</item>
+        <item quantity="two">two (%d)</item>
+        <item quantity="few">few (%d)</item>
+        <item quantity="many">many (%d)</item>
+        <item quantity="other">other (%d)</item>
+    </plurals>
 </resources>

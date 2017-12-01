@@ -109,11 +109,11 @@ public class SeekBarPreferenceCompat extends Preference implements View.OnClickL
     }
 
     public String getMeasurementUnit() {
-        return controllerDelegate.getMeasurementUnit();
+        return controllerDelegate.getUnit();
     }
 
     public void setMeasurementUnit(String measurementUnit) {
-        controllerDelegate.setMeasurementUnit(measurementUnit);
+        controllerDelegate.setUnit(measurementUnit);
     }
 
     public boolean isDialogEnabled() {

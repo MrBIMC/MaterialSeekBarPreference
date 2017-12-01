@@ -2,6 +2,19 @@
     xmlns:sample="http://schemas.android.com/apk/res-auto">
 
     <com.pavelsikun.seekbarpreference.SeekBarPreference
+        android:defaultValue="0"
+        android:key="pr1s"
+        android:title="SeekbarPreference Plurals"
+        sample:msbp_dialogStyle="@style/MSB_Dialog_Default.Freaky"
+
+        sample:msbp_interval="1"
+        sample:msbp_maxValue="10"
+        sample:msbp_measurementUnit="@plurals/plural_bananas"
+
+
+        sample:msbp_minValue="-10" />
+
+    <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:defaultValue="600"
         android:key="pr1"
         android:title="SeekbarPreference 1"
