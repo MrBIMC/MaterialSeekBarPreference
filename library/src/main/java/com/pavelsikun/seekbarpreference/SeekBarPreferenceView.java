@@ -113,11 +113,11 @@ public class SeekBarPreferenceView extends FrameLayout implements View.OnClickLi
     }
 
     public String getMeasurementUnit() {
-        return controllerDelegate.getMeasurementUnit();
+        return controllerDelegate.getUnit();
     }
 
     public void setMeasurementUnit(String measurementUnit) {
-        controllerDelegate.setMeasurementUnit(measurementUnit);
+        controllerDelegate.setUnit(measurementUnit);
     }
 
     public void setOnValueSelectedListener(PersistValueListener persistValueListener) {

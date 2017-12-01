@@ -94,7 +94,7 @@ Either of way, View/Preference provides next methods to modify and manage it fro
     public void setCurrentValue(int currentValue);
 
     public String getMeasurementUnit();
-    public void setMeasurementUnit(String measurementUnit);
+    public void setMeasurementUnit(String unit);
 
     public void setDialogEnabled(boolean dialogEnabled);
 

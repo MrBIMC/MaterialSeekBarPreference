@@ -108,11 +108,11 @@ public class SeekBarPreference extends Preference implements View.OnClickListene
     }
 
     public String getMeasurementUnit() {
-        return controllerDelegate.getMeasurementUnit();
+        return controllerDelegate.getUnit();
     }
 
     public void setMeasurementUnit(String measurementUnit) {
-        controllerDelegate.setMeasurementUnit(measurementUnit);
+        controllerDelegate.setUnit(measurementUnit);
     }
 
     public boolean isDialogEnabled() {
