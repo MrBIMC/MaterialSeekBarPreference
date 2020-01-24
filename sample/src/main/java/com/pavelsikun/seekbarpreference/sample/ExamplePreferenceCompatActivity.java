@@ -1,9 +1,9 @@
 package com.pavelsikun.seekbarpreference.sample;
 
 import android.os.Bundle;
-import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
