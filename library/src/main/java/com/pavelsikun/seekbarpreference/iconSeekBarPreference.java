@@ -10,29 +10,31 @@ import android.view.View;
 import android.widget.ImageView;
 
 /**
- * Created by Pavel Sikun on 21.05.16.
+ * Created by doerma 2020.1.25
  */
 
-public class SeekBarPreference extends Preference implements View.OnClickListener, PreferenceControllerDelegate.ViewStateListener, PersistValueListener, ChangeValueListener {
+public class iconSeekBarPreference extends Preference implements View.OnClickListener, PreferenceControllerDelegate.ViewStateListener, PersistValueListener, ChangeValueListener {
 
+    private Drawable mIcon;
     private PreferenceControllerDelegate controllerDelegate;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public SeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public iconSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(attrs);
     }
 
-    public SeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+    public iconSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
-     }
+        this.mIcon = context.obtainStyledAttributes(attrs, R.styleable.SeekBarPreference, defStyleAttr, 0).getDrawable(R.styleable.SeekBarPreference_icon);
+    }
 
-    public SeekBarPreference(Context context, AttributeSet attrs) {
+    public iconSeekBarPreference(Context context, AttributeSet attrs) {
         this(context, attrs,0);
     }
 
-    public SeekBarPreference(Context context) {
+    public iconSeekBarPreference(Context context) {
         this(context,null,0);
     }
 
@@ -52,6 +54,11 @@ public class SeekBarPreference extends Preference implements View.OnClickListene
     protected void onBindView(View view) {
         super.onBindView(view);
         controllerDelegate.onBind(view);
+
+        final ImageView imageView = (ImageView)view.findViewById(R.id.icon);
+        if ((imageView != null) && (this.mIcon != null)) {
+            imageView.setImageDrawable(this.mIcon);
+        }
     }
 
     @Override
@@ -128,4 +135,13 @@ public class SeekBarPreference extends Preference implements View.OnClickListene
         controllerDelegate.setDialogStyle(dialogStyle);
     }
 
+    public void setIcon(final Drawable icon) {
+        if (((icon == null) && (this.mIcon != null)) || ((icon != null) && (!icon.equals(this.mIcon)))) {
+            this.mIcon = icon;
+            this.notifyChanged();
+        }
+    }
+    public Drawable getIcon() {
+        return this.mIcon;
+    }
 }

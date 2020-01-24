@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.pavelsikun.seekbarpreference.sample"
-        minSdkVersion 11
+        minSdkVersion 14
         targetSdkVersion 29
         versionCode 6
         versionName "6.0"

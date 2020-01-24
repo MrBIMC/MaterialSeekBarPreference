@@ -1,6 +1,7 @@
 package com.pavelsikun.seekbarpreference.sample;
 
 import android.annotation.TargetApi;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
@@ -48,6 +49,7 @@ public class ExamplePreferenceActivity extends AppCompatActivity {
         @Override
         public void onViewCreated(View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
+
 
             SeekBarPreference pref = new SeekBarPreference(getActivity());
             pref.setTitle("Dynamic Preference");
