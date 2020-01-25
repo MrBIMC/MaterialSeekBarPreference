@@ -3,7 +3,6 @@ package com.pavelsikun.seekbarpreference;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -12,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Created by Pavel Sikun on 21.05.16.

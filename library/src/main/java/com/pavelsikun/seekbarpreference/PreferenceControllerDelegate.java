@@ -2,10 +2,12 @@ package com.pavelsikun.seekbarpreference;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -47,6 +49,7 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
     private String title;
     private String summary;
     private boolean isEnabled;
+    private Drawable mIcon;
 
     //controller stuff
     private boolean isView = false;
@@ -99,6 +102,7 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
                 measurementUnit = a.getString(R.styleable.SeekBarPreference_msbp_measurementUnit);
                 currentValue = attrs.getAttributeIntValue("http://schemas.android.com/apk/res/android", "defaultValue", DEFAULT_CURRENT_VALUE);
 
+                mIcon=a.getDrawable(R.styleable.SeekBarPreference_icon);
 //                TODO make it work:
 //                dialogStyle = a.getInt(R.styleable.SeekBarPreference_msbp_interval, DEFAULT_DIALOG_STYLE);
 
@@ -129,6 +133,10 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
             summaryView.setText(summary);
         }
 
+        final ImageView imageView = (ImageView)view.findViewById(R.id.icon);
+        if ((imageView != null) && (this.mIcon != null)) {
+            imageView.setImageDrawable(this.mIcon);
+        }
         view.setClickable(false);
 
         seekBarView = (SeekBar) view.findViewById(R.id.seekbar);
@@ -335,5 +343,13 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
 
     void setDialogStyle(int dialogStyle) {
         this.dialogStyle = dialogStyle;
+    }
+    public void setIcon(final Drawable icon) {
+        if (((icon == null) && (this.mIcon != null)) || ((icon != null) && (!icon.equals(this.mIcon)))) {
+            this.mIcon = icon;
+        }
+    }
+    public Drawable getIcon() {
+        return this.mIcon;
     }
 }

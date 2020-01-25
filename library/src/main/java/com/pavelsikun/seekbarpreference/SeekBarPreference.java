@@ -2,12 +2,10 @@ package com.pavelsikun.seekbarpreference;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.ImageView;
 
 /**
  * Created by Pavel Sikun on 21.05.16.

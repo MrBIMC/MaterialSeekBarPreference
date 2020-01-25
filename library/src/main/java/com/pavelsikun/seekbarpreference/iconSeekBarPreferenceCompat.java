@@ -2,6 +2,7 @@ package com.pavelsikun.seekbarpreference;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
@@ -13,27 +14,27 @@ import androidx.preference.PreferenceViewHolder;
  * Created by Pavel Sikun on 22.05.16.
  */
 
-public class SeekBarPreferenceCompat extends Preference implements View.OnClickListener, PreferenceControllerDelegate.ViewStateListener, PersistValueListener, ChangeValueListener {
+public class iconSeekBarPreferenceCompat extends Preference implements View.OnClickListener, PreferenceControllerDelegate.ViewStateListener, PersistValueListener, ChangeValueListener {
 
     private PreferenceControllerDelegate controllerDelegate;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public SeekBarPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public iconSeekBarPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(attrs);
     }
 
-    public SeekBarPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr) {
+    public iconSeekBarPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
 
-    public SeekBarPreferenceCompat(Context context, AttributeSet attrs) {
+    public iconSeekBarPreferenceCompat(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(attrs);
     }
 
-    public SeekBarPreferenceCompat(Context context) {
+    public iconSeekBarPreferenceCompat(Context context) {
         super(context);
         init(null);
     }
@@ -127,5 +128,12 @@ public class SeekBarPreferenceCompat extends Preference implements View.OnClickL
 
     public void setDialogStyle(int dialogStyle) {
         controllerDelegate.setDialogStyle(dialogStyle);
+    }
+    public void setIcon(final Drawable icon) {
+        controllerDelegate.setIcon(icon);
+        this.notifyChanged();
+    }
+    public Drawable getIcon() {
+        return controllerDelegate.getIcon();
     }
 }
