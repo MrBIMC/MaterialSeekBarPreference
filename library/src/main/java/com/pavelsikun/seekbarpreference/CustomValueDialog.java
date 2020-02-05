@@ -89,9 +89,16 @@ class CustomValueDialog {
 
     private void tryApply() {
         int value;
+        String s = customValueView.getText().toString();
 
         try {
-            value = Integer.parseInt(customValueView.getText().toString());
+
+            if (s.isEmpty()) {
+                value = currentValue;
+            }
+            else {
+                value = Integer.parseInt(s);
+            }
             if (value > maxValue) {
                 Log.e(TAG, "wrong input( > than required): " + customValueView.getText().toString());
                 notifyWrongInput();
