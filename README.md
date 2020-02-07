@@ -124,3 +124,24 @@ I'd really want to thank:
 Lib is licenced under *Apache2 licence*, so you can do whatever you want with it.
 I'd highly recommend to push changes back to make it cooler :D
 
+# something new
+2020-02-07 by doerma
+1.SeekBarPreferenceCompat migrate to AndroidX.
+2.Icon supported.  using:iconSeekBarPreference\iconSeekBarPreferenceCompat\iconSeekBarPreferenceView instead.
+for example:
+```xml
+    <com.pavelsikun.seekbarpreference.SeekBarPreferenceCompat
+        android:key="your_pref_key"
+        android:title="SeekbarPreference 2"
+        android:summary="Some summary"
+        android:enabled="false"
+        android:defaultValue="5000"
+
+        sample:icon="@drawable/your_icon"
+        sample:msbp_minValue="100"
+        sample:msbp_maxValue="10000"
+        sample:msbp_interval="200"
+        sample:msbp_measurementUnit="%"
+        sample:msbp_dialogEnabled="false"/>
+````
+3.Fix a bug that sometimes seekbar can't seek to the end.

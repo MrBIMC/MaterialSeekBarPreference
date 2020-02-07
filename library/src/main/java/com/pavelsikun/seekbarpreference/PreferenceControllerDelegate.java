@@ -33,7 +33,6 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
     private int minValue;
     private int interval;
     private int currentValue;
-    private int max;
 
 
     private String measurementUnit;
@@ -267,7 +266,7 @@ class PreferenceControllerDelegate implements SeekBar.OnSeekBarChangeListener, V
 
     void setMaxValue(int maxValue) {
         this.maxValue = maxValue;
-        max = (maxValue - minValue) / interval;
+        int max = (maxValue - minValue) / interval;
 
         if (seekBarView != null) {
             seekBarView.setMax(max);
