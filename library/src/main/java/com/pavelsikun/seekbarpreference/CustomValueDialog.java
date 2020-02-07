@@ -3,7 +3,6 @@ package com.pavelsikun.seekbarpreference;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -12,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AlertDialog;
 
 /**
  * Created by Pavel Sikun on 21.05.16.
@@ -88,9 +89,16 @@ class CustomValueDialog {
 
     private void tryApply() {
         int value;
+        String s = customValueView.getText().toString();
 
         try {
-            value = Integer.parseInt(customValueView.getText().toString());
+
+            if (s.isEmpty()) {
+                value = currentValue;
+            }
+            else {
+                value = Integer.parseInt(s);
+            }
             if (value > maxValue) {
                 Log.e(TAG, "wrong input( > than required): " + customValueView.getText().toString());
                 notifyWrongInput();

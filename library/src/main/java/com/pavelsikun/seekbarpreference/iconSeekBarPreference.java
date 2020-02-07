@@ -2,44 +2,43 @@ package com.pavelsikun.seekbarpreference;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.preference.Preference;
 import android.util.AttributeSet;
 import android.view.View;
-
-import androidx.preference.Preference;
-import androidx.preference.PreferenceViewHolder;
+import android.widget.ImageView;
 
 /**
- * Created by Pavel Sikun on 22.05.16.
+ * Created by doerma 2020.1.25
  */
 
-public class SeekBarPreferenceCompat extends Preference implements View.OnClickListener, PreferenceControllerDelegate.ViewStateListener, PersistValueListener, ChangeValueListener {
+public class iconSeekBarPreference extends Preference implements View.OnClickListener, PreferenceControllerDelegate.ViewStateListener, PersistValueListener, ChangeValueListener {
 
     private PreferenceControllerDelegate controllerDelegate;
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public SeekBarPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public iconSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         init(attrs);
     }
 
-    public SeekBarPreferenceCompat(Context context, AttributeSet attrs, int defStyleAttr) {
+    public iconSeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
+      }
+
+    public iconSeekBarPreference(Context context, AttributeSet attrs) {
+        this(context, attrs,0);
     }
 
-    public SeekBarPreferenceCompat(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(attrs);
-    }
-
-    public SeekBarPreferenceCompat(Context context) {
-        super(context);
-        init(null);
+    public iconSeekBarPreference(Context context) {
+        this(context,null,0);
     }
 
     private void init(AttributeSet attrs) {
         setLayoutResource(R.layout.seekbar_view_layout);
+
         controllerDelegate = new PreferenceControllerDelegate(getContext(), false);
 
         controllerDelegate.setViewStateListener(this);
@@ -50,9 +49,9 @@ public class SeekBarPreferenceCompat extends Preference implements View.OnClickL
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder viewRoot) {
-        super.onBindViewHolder(viewRoot);
-        controllerDelegate.onBind(viewRoot.itemView);
+    protected void onBindView(View view) {
+        super.onBindView(view);
+        controllerDelegate.onBind(view);
     }
 
     @Override
@@ -127,5 +126,13 @@ public class SeekBarPreferenceCompat extends Preference implements View.OnClickL
 
     public void setDialogStyle(int dialogStyle) {
         controllerDelegate.setDialogStyle(dialogStyle);
+    }
+
+    public void setIcon(final Drawable icon) {
+        controllerDelegate.setIcon(icon);
+            this.notifyChanged();
+    }
+    public Drawable getIcon() {
+        return controllerDelegate.getIcon();
     }
 }

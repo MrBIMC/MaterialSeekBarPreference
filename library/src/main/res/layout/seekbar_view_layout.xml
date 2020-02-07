@@ -1,5 +1,22 @@
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_frame"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="?android:attr/listPreferredItemHeight"
+    android:gravity="center_vertical"
+    android:paddingRight="?android:attr/scrollbarSize">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dip"
+        android:layout_marginRight="6dip"
+        android:layout_gravity="center" />
+
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="?android:attr/listPreferredItemHeight"
@@ -12,11 +29,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
-        android:maxLines="1"
         android:textSize="16sp"
         android:textColor="?android:attr/textColorPrimary"
         android:ellipsize="marquee"
-        android:fadingEdge="horizontal"/>
+        android:fadingEdge="horizontal"
+        android:singleLine="true" />
 
     <TextView
         android:id="@android:id/summary"
@@ -74,9 +91,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:maxLines="1"
                         android:ellipsize="marquee"
-                        android:textColor="?android:attr/textColorSecondary"/>
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:singleLine="true" />
                 </LinearLayout>
 
                 <FrameLayout
@@ -90,4 +107,5 @@
 
     </RelativeLayout>
 
+</LinearLayout>
 </LinearLayout>

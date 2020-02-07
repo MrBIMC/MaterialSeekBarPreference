@@ -1,7 +1,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:sample="http://schemas.android.com/apk/res-auto">
 
-    <com.pavelsikun.seekbarpreference.SeekBarPreference
+    <com.pavelsikun.seekbarpreference.iconSeekBarPreference
         android:defaultValue="600"
         android:key="pr1"
         android:title="SeekbarPreference 1"
@@ -9,7 +9,8 @@
         sample:msbp_interval="20"
         sample:msbp_maxValue="1000"
         sample:msbp_measurementUnit="bananas"
-        sample:msbp_minValue="0" />
+        sample:msbp_minValue="0"
+        sample:icon="@drawable/settings_box"/>
 
     <com.pavelsikun.seekbarpreference.SeekBarPreference
         android:defaultValue="0"

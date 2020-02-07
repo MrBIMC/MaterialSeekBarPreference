@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="errors.must_be_between">必须在两者之间：</string>
+    <string name="enter_custom_value">输入自定义值</string>
+    <string name="apply">应用</string>
+    <string name="errors.and">和</string>
+</resources>

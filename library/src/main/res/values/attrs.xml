@@ -14,5 +14,7 @@
 
         <!--not implemented yet-->
         <!--<attr name="msbp_dialogStyle" format="reference"/>-->
+
+        <attr name="icon" format="reference" />
     </declare-styleable>
 </resources>

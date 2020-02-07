@@ -24,20 +24,19 @@ public class SeekBarPreference extends Preference implements View.OnClickListene
     public SeekBarPreference(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
-    }
+     }
 
     public SeekBarPreference(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(attrs);
+        this(context, attrs,0);
     }
 
     public SeekBarPreference(Context context) {
-        super(context);
-        init(null);
+        this(context,null,0);
     }
 
     private void init(AttributeSet attrs) {
         setLayoutResource(R.layout.seekbar_view_layout);
+
         controllerDelegate = new PreferenceControllerDelegate(getContext(), false);
 
         controllerDelegate.setViewStateListener(this);
@@ -126,4 +125,5 @@ public class SeekBarPreference extends Preference implements View.OnClickListene
     public void setDialogStyle(int dialogStyle) {
         controllerDelegate.setDialogStyle(dialogStyle);
     }
+
 }
